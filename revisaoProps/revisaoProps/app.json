@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "loginScreen",
-    "slug": "loginScreen",
+    "name": "revisaoProps",
+    "slug": "revisaoProps",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,12 +27,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": "node_modules/@expo-google-fonts/inter/roboto/Roboto-Regular.ttf"
-        }
-      ]
+      "expo-font"
     ]
   }
 }
