@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "viaCEP",
-    "slug": "viaCEP",
+    "name": "viaCepProf",
+    "slug": "viaCepProf",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

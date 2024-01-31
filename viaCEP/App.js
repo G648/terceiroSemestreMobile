@@ -5,6 +5,7 @@ import { Container } from './src/components/container/container';
 import { Logo } from './src/components/Image/image';
 import { InputStyle } from './src/components/inputs/inputs';
 import { Div, DivFlex } from './src/components/div/div';
+import homeScreen from './src/screens/homeScreen';
 
 export default function App() {
   return (
@@ -55,6 +56,9 @@ export default function App() {
       </DivFlex>
 
       <StatusBar style="auto" />
+
+      
+
     </Container>
   );
 }
