@@ -1,69 +1,22 @@
-import { BoxInput, ContainerForm, Input, Label, ScrollViewApp } from "./style";
+import { ContainerForm, ScrollViewApp } from "./style";
+import { BoxInput } from "../../components/BoxInput";
 
 export function HomeScreen() {
 
     //Hooks - states
     //hooks - efect
     //chamada da API
+
     return (
         <ScrollViewApp>
             <ContainerForm>
-                <BoxInput>
-                    <Label>
-                        Informe o CEP
-                    </Label>
-                    <Input placeholder="teste" keyboardType='numeric'>
-
-                    </Input>
-                </BoxInput>
-                <BoxInput>
-                    <Label>
-                        Logradouro
-                    </Label>
-                    <Input placeholder="teste">
-
-                    </Input>
-                </BoxInput>
-                <BoxInput>
-                    <Label>
-                        Bairro
-                    </Label>
-                    <Input placeholder="teste">
-
-                    </Input>
-                </BoxInput>
-                <BoxInput>
-                    <Label>
-                        Informe o CEP
-                    </Label>
-                    <Input placeholder="teste">
-
-                    </Input>
-                </BoxInput>
-                <BoxInput>
-                    <Label>
-                        Cidade
-                    </Label>
-                    <Input placeholder="teste">
-
-                    </Input>
-                </BoxInput>
-                <BoxInput>
-                    <Label>
-                        Estado
-                    </Label>
-                    <Input placeholder="teste">
-
-                    </Input>
-                </BoxInput>
-                <BoxInput>
-                    <Label>
-                        UF
-                    </Label>
-                    <Input placeholder="teste">
-
-                    </Input>
-                </BoxInput>
+                <BoxInput
+                    textLabel="teste"
+                    placeholder="Cep..."
+                    KeyType="numeric"
+                    maxLength={9}
+                    fieldWidth={100}
+                />
             </ContainerForm>
         </ScrollViewApp>
     )
