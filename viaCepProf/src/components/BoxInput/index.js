@@ -14,12 +14,13 @@ export const BoxInput = ({
     maxLength
 }) => {
     return (
-        <>
+        <FieldContent fieldWidth={fieldWidth}>
             <Label
                 textLabel={textLabel}
             />
 
             <Input
+                fieldWidth={fieldWidth}
                 placeholder={placeholder}
                 editable={editable}
                 KeyType={KeyType}
@@ -27,7 +28,8 @@ export const BoxInput = ({
                 fieldValue={fieldValue}
                 onChangeText={onChangeText}
             />
-       </>
+        </FieldContent>
+       
 
     )
 }

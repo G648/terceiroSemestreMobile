@@ -7,7 +7,7 @@ export const HeaderContainer = styled.View`
     justify-content:center;
 
     border-radius: 0 0 15px 15px;
-    elevation: 20px;
+    /* elevation: 20px; */
     /* margin-bottom: 20px; */
 `
 

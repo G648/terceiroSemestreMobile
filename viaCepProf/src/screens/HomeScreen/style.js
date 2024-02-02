@@ -17,24 +17,10 @@ export const ScrollViewApp =styled.ScrollView`
 export const ContainerForm = styled(ScrollViewApp)`
     width: 90%;
     flex: 4;
-    
+    margin: 20px auto;
 `
 
-// export const BoxInput = styled.View`
-//     height: 100;
-//     justify-content: space-between;
-// `
-
-// export const Label = styled.Text`
-//     font-size: 18px;
-//     color: #047CD3;
-// `
-
-// export const Input = styled.TextInput`
-//     border-width: 2;
-//     border-radius: 10px;
-//     height: 60px;
-//     background-color: #F6F6F6;
-//     border-color: #A1A1A1;
-//     padding: 10px;
-// `
+export const RowContainer = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`
