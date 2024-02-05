@@ -5,15 +5,6 @@ import { useEffect, useState } from "react";
 
 export function HomeScreen() {
 
-    //Hooks - states
-    // const [cep, setCep] = useState({
-    //     cep: "",
-    //     logradouro: "",
-    //     bairro: "",
-    //     cidade:"",
-    //     estado: ""
-    // })
-
     const [cep, setCep] = useState('')
     const [logradouro, setLogradouro] = useState('')
     const [bairro, setBairro] = useState('')
@@ -23,28 +14,31 @@ export function HomeScreen() {
 
     //hooks - efect
     useEffect(() => {
+
         if (cep != "" && cep.length === 8) {
             getViaCep();
+
         } else {
             console.log('====================================');
-            console.log("deu ruim");
+            console.log("deu ruim na verificação do cep");
             console.log('====================================');
         }
-    }, []);
+
+    }, [cep]);
 
     //chamada da API
     async function getViaCep() {
         try {
-            const retornoDados = await api.get(`${cep}/json`)
+            const retornoDados = await api.get(`${cep}/json/`)
 
             console.log('====================================');
-            console.log(retornoDados);
+            console.log(retornoDados.data);
             console.log('====================================');
 
             setLogradouro(retornoDados.data.logradouro)
             setBairro(retornoDados.data.bairro)
-            setCidade(retornoDados.data.cidade)
-            setEstado(retornoDados.data.estado)
+            setCidade(retornoDados.data.localidade)
+            setEstado(retornoDados.data.localidade)
             setUf(retornoDados.data.uf)
 
         } catch (error) {
@@ -61,9 +55,10 @@ export function HomeScreen() {
                 <BoxInput
                     textLabel="Informar CEP"
                     placeholder="Cep..."
-                    KeyType="numeric"
+                    KeyType='numeric'
                     maxLength={9}
                     fieldWidth={100}
+                    onBlur={getViaCep}
                     editable={true}
                     fieldValue={cep}
                     onChangeText={tx => setCep(tx)}
