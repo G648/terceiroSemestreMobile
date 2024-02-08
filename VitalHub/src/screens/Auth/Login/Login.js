@@ -6,10 +6,15 @@ import { Input } from '../../../components/Input/Input';
 import { LinkMedium } from '../../../components/Links/Style';
 import { Button, ButtonFlex } from '../../../components/Button/Button';
 import { View } from 'react-native';
+import { ComeBack } from '../../../components/GoBackPage/GoBackPage';
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   return (
     <Container>
+      <ComeBack 
+        onClick={() => navigation.navigate('Navegacao')}
+      />
+
       <Logo source={require("../../../assets/Images/LogoBlue.png")} />
       <Title >Entrar ou criar conta</Title>
 
@@ -18,7 +23,6 @@ const Login = ({navigation}) => {
         placeholder="Senha"
         secureTextEntry={true}
       />
-
 
       <LinkMedium>Esqueceu sua senha</LinkMedium>
 
@@ -44,7 +48,7 @@ const Login = ({navigation}) => {
 
       <View style={{ flexDirection: "row", justifyContent: "center", alignSelf: "center", width: "90%", gap: -60 }}>
         <LinkMedium>
-        
+
           Não tem conta ?
 
         </LinkMedium>
