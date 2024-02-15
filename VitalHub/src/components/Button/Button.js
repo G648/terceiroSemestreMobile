@@ -2,7 +2,7 @@ import styled from "styled-components/native/";
 import { AntDesign } from '@expo/vector-icons';
 
 export const ButtonStyle = styled.TouchableOpacity`
-    background-color: ${props => props.backgroundColor} ;
+    background-color: ${({backgroundColor}) => backgroundColor} ;
     border-color: ${props => props.border};
     border-width: 1px;
     width:90%;
@@ -30,7 +30,8 @@ export function Button({
     color,
     fieldButton,
     marginTopButton,
-    onClick
+    onClick,
+    buttonOppacity
 }) {
   return (
 
@@ -39,6 +40,7 @@ export function Button({
             border={fieldButton}
             marginTop={marginTopButton}
             onPress={onClick}
+            activeOpacity={buttonOppacity}
         >
            
             <TitleStyle

@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { APP_COLORS } from "../../utils/App_colors";
 
-export const Container = styled.View`
+export const ContainerValidator = styled.View`
     flex-direction: row;
     width: 90%;
     height: 62px;
@@ -20,14 +20,17 @@ export const InputValidation = styled.TextInput.attrs(
     border-radius: 5px;
     font-size: 40px;
     color: ${APP_COLORS.primaryV3};
+    text-align: center;
+    
 `
 
 export function InputValidator({
 
 }) {
     return(
-        <Container>
-            <InputValidation/>
-        </Container>
+            <InputValidation
+                keyboardType="numeric"
+                maxLength={1}
+            />        
     )
 }

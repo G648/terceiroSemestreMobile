@@ -10,6 +10,7 @@ import { useFonts, MontserratAlternates_600SemiBold, MontserratAlternates_500Med
 import { Quicksand_700Bold } from '@expo-google-fonts/quicksand';
 import Cadastro from './src/screens/Auth/Cadastro/Cadastro';
 import { VerificaEmail } from './src/screens/Auth/VerificaEmail/VerificaEmail';
+import CadastroUser from './src/screens/Auth/CadastroUser/CadastroUser';
 export default function App() {
 
   const [fontsLoaded, fontsError] = useFonts({
@@ -61,6 +62,12 @@ export default function App() {
           name='VerificaEmail'
           component={VerificaEmail}
           options={{title: 'VerificaEmail'}}
+        />
+
+        <Stack.Screen
+          name='CadastroUser'
+          component={CadastroUser}
+          options={{title: 'CadastroUser'}}
         />
 
       </Stack.Navigator>

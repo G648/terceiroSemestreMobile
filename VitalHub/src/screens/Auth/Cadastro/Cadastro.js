@@ -13,6 +13,7 @@ const Cadastro = ({navigation}) => {
         <Container>
             <ComeBack
                 onClick={() => navigation.navigate('Login')}
+                buttonOpacity={0.8}
             />
 
             <Logo
@@ -40,6 +41,7 @@ const Cadastro = ({navigation}) => {
                 color={APP_COLORS.white}
                 marginTopButton={30}
                 onClick={() => {navigation.navigate('VerificaEmail')}}
+                buttonOppacity={0.8}
             />
 
         </Container>

@@ -20,18 +20,20 @@ export const CircleComeBack = styled.TouchableOpacity`
 
 export function ComeBack({
     onClick,
-    isClosable
+    isClosable,
+    buttonOpacity
 }) {
 
     const icon = isClosable ? "close" : "arrowleft";
-    // const iconColor = isClosable ? APP_COLORS.primaryV2 : APP_COLORS.primaryV1;
+    const iconColor = isClosable ? APP_COLORS.primaryV2 : APP_COLORS.primaryV1;
 
     return (
         <Container>
             <CircleComeBack
+                activeOpacity={buttonOpacity}
                 onPress={onClick}
             >
-                <AntDesign name={icon} size={24} color={APP_COLORS.primaryV1}/>
+                <AntDesign name={icon} size={24} color={iconColor}/>
             </CircleComeBack>
         </Container>
     )

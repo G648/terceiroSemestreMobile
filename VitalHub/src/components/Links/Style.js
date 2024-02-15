@@ -1,12 +1,39 @@
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 export const LinkMedium = styled.Text`
 font-size: 14px;
 font-family: 'MontserratAlternates_500Medium' ;
 color: #8c8a97;
 margin-top: 26px;
-align-self: flex-start;
+align-self: center ;
 margin-left: 20px;
 text-decoration: underline;
 margin-bottom: 15px;
+color: ${props => props.ColorText};
 `
+
+export const ButtonLink = styled.TouchableOpacity`
+    align-self: ${props => props.AlignSelf};
+`
+
+export function UnderlinedLink({
+    textIntput,
+    ColorText,
+    buttonOpacity,
+    onClick,
+    buttonAlign
+}) {
+    return (
+        <ButtonLink
+            activeOpacity={buttonOpacity}
+            onPress={onClick}
+            AlignSelf={buttonAlign}
+        >
+            <LinkMedium
+                ColorText={ColorText}
+            >
+                {textIntput}
+            </LinkMedium>
+        </ButtonLink>
+    );
+}

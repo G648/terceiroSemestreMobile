@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Entypo } from '@expo/vector-icons';
+import { useState } from "react";
 
 export const Input = styled.TextInput.attrs(
     {
@@ -15,3 +17,28 @@ color: #34898F;
 font-size: 16px;
 font-family: 'MontserratAlternates_600SemiBold';
 `
+
+export function InputValues({
+    secureTextEntry,
+    ...props
+}) {
+    const [showPassword, setShowPassword] = useState(false);
+
+    return (
+        <>
+            <Input
+                secureTextEntry={secureTextEntry && !showPassword}
+                {...props}
+            />
+            {secureTextEntry && (
+                <Entypo
+                    name={showPassword ? "eye" : "eye-with-line"}
+                    size={24}
+                    color="#34898F"
+                    style={{ position: 'relative', right: -150, top: -38 }}
+                    onPress={() => setShowPassword(!showPassword)}
+                />
+            )}
+        </>
+    );
+}
