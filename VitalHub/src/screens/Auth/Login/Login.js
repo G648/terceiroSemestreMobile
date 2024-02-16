@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '../../../components/Container/Style';
+import { Container, ContainerView } from '../../../components/Container/Style';
 import { Logo } from '../../../components/Logo/Style';
 import { Title } from '../../../components/Title/Style';
 import { Input, InputValues } from '../../../components/Input/Input';
@@ -8,17 +8,43 @@ import { Button, ButtonFlex } from '../../../components/Button/Button';
 import { View } from 'react-native';
 import { ComeBack } from '../../../components/GoBackPage/GoBackPage';
 import { APP_COLORS } from '../../../utils/App_colors';
+import { useTheme, ThemeProvider } from '../../../theme/themeContext';
+// import { useState } from "react";
+import { TouchableOpacity } from "react-native";
+import { Feather } from '@expo/vector-icons';
 
 const Login = ({ navigation }) => {
+
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => ({
+      ...prevTheme,
+      colors: {
+        ...prevTheme.colors,
+        // Aqui você pode definir as cores do tema escuro e claro conforme necessário
+      }
+    }));
+  };
+
   return (
-    <Container>
+
+    <ContainerView >
       <ComeBack
         onClick={() => navigation.navigate('Navegacao')}
         buttonOpacity={1}
       />
 
+      <TouchableOpacity onPress={toggleTheme}>
+        <Feather
+          name={theme.isDarkMode ? 'sun' : 'moon'} // Alterna entre o ícone de sol e lua com base no modo escuro
+          size={24}
+          color={theme.colors.primary}
+        />
+      </TouchableOpacity>
+
       <Logo source={require("../../../assets/Images/LogoBlue.png")} />
-      <Title >Entrar ou criar conta</Title>
+      <Title>Entrar ou criar conta</Title>
 
       <Input placeholder="Usuário ou E-mail" />
 
@@ -54,7 +80,6 @@ const Login = ({ navigation }) => {
           marginTopButton={15}
           buttonOppacity={0.6}
         />
-
       </ButtonFlex>
 
       <View style={{ flexDirection: "row", justifyContent: "center", alignSelf: "center", width: "90%", gap: -60 }}>
@@ -70,8 +95,7 @@ const Login = ({ navigation }) => {
           buttonOppacity={0.8}
         />
       </View>
-
-    </Container>
+    </ContainerView>
   );
 };
 

@@ -5,7 +5,7 @@ import { ComeBack } from '../../../components/GoBackPage/GoBackPage'
 import { Logo } from '../../../components/Logo/Style'
 import { ParagrafText } from '../../../components/Paragraf/Paragraf'
 import { APP_COLORS } from '../../../utils/App_colors'
-import { Input, InputValues } from '../../../components/Input/Input'
+import { InputValues } from '../../../components/Input/Input'
 import { Button } from '../../../components/Button/Button'
 import { UnderlinedLink } from '../../../components/Links/Style'
 
