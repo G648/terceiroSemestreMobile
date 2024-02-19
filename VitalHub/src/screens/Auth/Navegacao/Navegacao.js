@@ -1,4 +1,4 @@
-import { Button, TouchableOpacity, View } from "react-native";
+import { Button, View } from "react-native";
 import { ComeBack } from "../../../components/GoBackPage/GoBackPage";
 
 export const Navegacao = ({ navigation }) => {
@@ -12,7 +12,6 @@ export const Navegacao = ({ navigation }) => {
                 title="Login"
                 onPress={() => navigation.navigate("Login")}
             />
-
            
         </View>
     );

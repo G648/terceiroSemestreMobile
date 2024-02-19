@@ -8,40 +8,16 @@ import { Button, ButtonFlex } from '../../../components/Button/Button';
 import { View } from 'react-native';
 import { ComeBack } from '../../../components/GoBackPage/GoBackPage';
 import { APP_COLORS } from '../../../utils/App_colors';
-import { useTheme, ThemeProvider } from '../../../theme/themeContext';
-// import { useState } from "react";
-import { TouchableOpacity } from "react-native";
-import { Feather } from '@expo/vector-icons';
 
 const Login = ({ navigation }) => {
 
-  const { theme, setTheme } = useTheme();
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => ({
-      ...prevTheme,
-      colors: {
-        ...prevTheme.colors,
-        // Aqui você pode definir as cores do tema escuro e claro conforme necessário
-      }
-    }));
-  };
-
   return (
 
-    <ContainerView >
+    <Container >
       <ComeBack
         onClick={() => navigation.navigate('Navegacao')}
         buttonOpacity={1}
       />
-
-      <TouchableOpacity onPress={toggleTheme}>
-        <Feather
-          name={theme.isDarkMode ? 'sun' : 'moon'} // Alterna entre o ícone de sol e lua com base no modo escuro
-          size={24}
-          color={theme.colors.primary}
-        />
-      </TouchableOpacity>
 
       <Logo source={require("../../../assets/Images/LogoBlue.png")} />
       <Title>Entrar ou criar conta</Title>
@@ -95,7 +71,7 @@ const Login = ({ navigation }) => {
           buttonOppacity={0.8}
         />
       </View>
-    </ContainerView>
+    </Container>
   );
 };
 

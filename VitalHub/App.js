@@ -10,7 +10,7 @@ import { Quicksand_700Bold } from '@expo-google-fonts/quicksand';
 import Cadastro from './src/screens/Auth/Cadastro/Cadastro';
 import { VerificaEmail } from './src/screens/Auth/VerificaEmail/VerificaEmail';
 import CadastroUser from './src/screens/Auth/CadastroUser/CadastroUser';
-import { ThemeProvider } from './src/theme/themeContext';
+import DoctorHome from './src/screens/Doctor/DoctorHome';
 
 
 export default function App() {
@@ -32,10 +32,16 @@ export default function App() {
     //StackNavigator
     //StackScreen
 
-    <ThemeProvider>
       <NavigationContainer>
         {/* Componente para navegação */}
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+
+        <Stack.Screen
+            name='Home'
+            component={DoctorHome}
+            options={{ title: 'Home' }}
+          />
+
           <Stack.Screen
             //nome da tela
             name='Navegacao'
@@ -73,9 +79,9 @@ export default function App() {
             options={{ title: 'CadastroUser' }}
           />
 
+         
         </Stack.Navigator>
       </NavigationContainer>
-    </ThemeProvider>
   );
 }
 
