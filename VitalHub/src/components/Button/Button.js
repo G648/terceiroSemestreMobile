@@ -1,21 +1,21 @@
-import styled from "styled-components/native/";
+import styled from "styled-components/native";
 
 export const ButtonStyle = styled.TouchableOpacity`
-    background-color: ${({backgroundColor}) => backgroundColor} ;
-    border-color: ${props => props.border};
-    border-width: 1px;
-    width:90%;
+    background-color: ${({ backgroundColor }) => backgroundColor} ;
+    border-color: ${({ border }) => border};
+    border-width: 2px;
+    width:${({ width = '90%' }) => width};
     height: 44px;
     border-radius: 5px;
-
-    margin-top: ${props => `${props.marginTop}px`};
+    margin-top: ${({ marginTop }) => `${marginTop}px`};
     padding: 12px 8px 12px 8px;
     align-items: center;
 `
+
 export const TitleStyle = styled.Text`
     font-family: "MontserratAlternates_700Bold";
     height: 20px;
-    color: ${props => props.colorText};
+    color: ${({ color }) => color};
 `
 
 export const ButtonFlex = styled.View`
@@ -24,30 +24,27 @@ export const ButtonFlex = styled.View`
 `
 
 export function Button({
-    titleButton,
-    backgroudButton,
+    title,
+    backgroundColor,
     color,
-    fieldButton,
-    marginTopButton,
-    onClick,
-    buttonOppacity
+    border,
+    marginTop,
+    onPress,
+    activeOpacity,
+    width
 }) {
-  return (
-
+    return (
         <ButtonStyle
-            backgroundColor={backgroudButton}
-            border={fieldButton}
-            marginTop={marginTopButton}
-            onPress={onClick}
-            activeOpacity={buttonOppacity}
+            backgroundColor={backgroundColor}
+            border={border}
+            marginTop={marginTop}
+            onPress={onPress}
+            activeOpacity={activeOpacity}
+            width={width}
         >
-           
-            <TitleStyle
-                colorText={color}
-            >
-                {titleButton}
+            <TitleStyle color={color}>
+                {title}
             </TitleStyle>
         </ButtonStyle>
-   
-  )
+    );
 }

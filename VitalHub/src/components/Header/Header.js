@@ -64,7 +64,7 @@ export const Header = ({
     return (
         <ContainerHeader>
             <BoxUser>
-                <ImageUser source={{ uri: "https://github.com/g648.png" }} />
+                <ImageUser source={{ uri: "https://github.com/G648.png" }} />
                 
                 <DataUser>
                     <TextDefault>{textValue}</TextDefault>

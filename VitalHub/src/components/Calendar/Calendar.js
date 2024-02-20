@@ -8,7 +8,7 @@ import { StyleSheet } from "react-native";
 
 export const StyledCalendarStrip = styled(CalendarStrip)`
   height: 100px;
-  width: 100%;
+  width: 90%;
   margin: 20px 0px;
   padding: 0px;
 `
@@ -78,7 +78,7 @@ export const CalendarHome = () => {
             highlightDateContainerStyle={styles.selectedContainerStyle}
 
             //tamanho do container
-            iconContainer={{ flex: 0.1 }}
+            iconContainer={{ flex: 0 }}
 
             //scroll da barra
             scrollable={true}
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#4E4B59',
         fontFamily: "MontserratAlternates_600SemiBold",
-        paddingHorizontal: 16
+        paddingHorizontal: 0
     },
     nameDateStyle: {
         color: "#ACABB7",
