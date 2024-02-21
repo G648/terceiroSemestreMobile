@@ -5,11 +5,12 @@ import { Container } from '../../components/Container/Style';
 import { ContainerView } from '../../components/Buttons/Buttons';
 import { Button } from '../../components/Button/Button';
 import { APP_COLORS } from '../../utils/App_colors';
-import teste, { FlalistInfos } from '../../components/FlatlistUsers/FlatlistUsers';
+import { ContainerFlatList, FlatlistInfos } from '../../components/FlatlistUsers/FlatlistUsers';
 import { CardUser } from '../../components/FlatlistUsers/CardFlatlistUsers';
-import Teste from '../../components/FlatlistUsers/FlatlistUsers';
+// import Teste from '../../components/FlatlistUsers/FlatlistUsers';
 import { MockData } from '../../utils/MockData';
-import { FlatList } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
+
 
 const DoctorHome = ({ }) => {
 
@@ -18,6 +19,10 @@ const DoctorHome = ({ }) => {
     function handleButtonCLick(buttonName) {
         setSelectedButton(buttonName)
     }
+
+    console.log('====================================');
+    console.log(MockData.length);
+    console.log('====================================');
 
     return (
         <Container>
@@ -58,21 +63,22 @@ const DoctorHome = ({ }) => {
                 />
             </ContainerView>
 
-
-
-            <FlalistInfos
-                endFillColor={APP_COLORS.white}
+            <FlatlistInfos
                 data={MockData}
                 renderItem={({ item }) => (
                     <CardUser
-                        textCardTitle={item.nome}
+                        imageUser={{uri: 'https://github.com/gsolivier.png'}}
+                        nameUser={item.nome}
                         ageUser={item.idade}
                         descriptionUser={item.situacao}
+                        iconName={"clockcircle"}
+                        iconColor={"#49B3BA"}
+                        schedulingTime={'14:00'}
                         key={item.id}
                     />
                 )}
-                keyExtractor={item => item.id}
-                // showsHorizontalScrollIndicator={false}
+                style={{ flex: 1 }}
+                showsVerticalScrollIndicator={false}
             />
         </Container>
 
