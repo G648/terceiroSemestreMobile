@@ -6,7 +6,7 @@ import Login from './src/screens/Auth/Login/Login';
 const Stack = createNativeStackNavigator();
 //import das fonts
 import { useFonts, MontserratAlternates_600SemiBold, MontserratAlternates_500Medium, MontserratAlternates_700Bold } from '@expo-google-fonts/montserrat-alternates';
-import { Quicksand_700Bold } from '@expo-google-fonts/quicksand';
+import { Quicksand_700Bold, Quicksand_600SemiBold,Quicksand_400Regular,Quicksand_500Medium, Quicksand_300Light } from '@expo-google-fonts/quicksand';
 import Cadastro from './src/screens/Auth/Cadastro/Cadastro';
 import { VerificaEmail } from './src/screens/Auth/VerificaEmail/VerificaEmail';
 import CadastroUser from './src/screens/Auth/CadastroUser/CadastroUser';
@@ -19,7 +19,11 @@ export default function App() {
     MontserratAlternates_600SemiBold,
     MontserratAlternates_500Medium,
     MontserratAlternates_700Bold,
-    Quicksand_700Bold
+    Quicksand_700Bold,
+    Quicksand_600SemiBold,
+    Quicksand_400Regular,
+    Quicksand_500Medium,
+    Quicksand_300Light
   })
 
   if (!fontsLoaded && !fontsError) {

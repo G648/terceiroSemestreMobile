@@ -3,6 +3,7 @@ export const APP_COLORS = {
     primaryV1: "#34898F",
     primaryV2: '#60BFC5',
     primaryV3: '#77CACF',
+    primaryV4: "#E8FCFD",
     secondary: '#496BBA',
     secondaryV1: '#344F8F',
     secondaryV2: '#496BBA',
@@ -13,5 +14,6 @@ export const APP_COLORS = {
     grayV4: '#7A7786',
     grayV5: '#ACABB7',
     grayV6: '#C6C5CE',
-    white: '#FAFAFA'
+    white: '#FAFAFA',
+    red: '#C81D25'
 }

@@ -1,6 +1,16 @@
 import styled from "styled-components/native";
-import { Title } from "../Title/Style";
 import { AntDesign } from '@expo/vector-icons';
+import { CardSituation } from "../../utils/AppSituationCard";
+import { APP_COLORS } from "../../utils/App_colors";
+
+const defaultBgColor = APP_COLORS.grayV6;
+const defaultIconColor = APP_COLORS.grayV1;
+const defaultTextColor = APP_COLORS.grayV2;
+
+const scheduledBgColor = APP_COLORS.primaryV4;
+const scheduledIconColor = APP_COLORS.primary;
+const scheduledTextColor = APP_COLORS.primary
+
 
 export const CardsUser = styled.View`
     flex: 1;
@@ -35,7 +45,7 @@ export const ProfileData = styled.View`
 `
 export const TextAge = styled.Text`
     font-size: 16px ;
-    color: #8C8A97;
+    color: ${defaultTextColor};
     font-family: "Quicksand_400Regular";
 `
 export const TextBold = styled(TextAge)`
@@ -56,20 +66,41 @@ export const ClockCard = styled.View`
     padding: 4px 23px;
     gap: 6px ;
     border-radius: 5px ;
-    background-color: ${(props) => props.situacao == "pendente" ? "#E8FCFD" : "#F1F0F5"} ;
+    background-color: ${(props) => props.situation == CardSituation.scheduled ? scheduledBgColor : defaultBgColor} ;
 `
+
+export const ClockIcon = styled(AntDesign)`
+    color: ${(props) =>
+        props.situation === CardSituation.scheduled ? scheduledIconColor : defaultIconColor
+    };
+`;
+
+export const ClockTime = styled.Text`
+    color: ${(props) =>
+        props.situation === CardSituation.scheduled ? scheduledTextColor : defaultTextColor
+    };
+    font-family: "Quicksand_600SemiBold";
+    font-size: 16px;
+`;
+
 export const ButtonCard = styled.TouchableOpacity`
-
+    
 `
+
 export const ButtonText = styled.Text`
-    color: ${(props) => props.situacao == "pendente" ? "#c81d25" : "#344f8f"} ;
+    font-family: 'MontserratAlternates_500Medium';
+    color: ${(props) => 
+        props.situation === CardSituation.scheduled ? APP_COLORS.red : APP_COLORS.secondaryV1
+    };
+    margin-right: 10px;
 `
 
-export const CardTitle = styled.Text`
-    color: ${({ colorTitle }) => colorTitle};
-`
+// export const CardTitle = styled.Text`
+//     color: ${({ colorTitle }) => colorTitle};
+// `
 
 export const ContainerFlex = styled.View`
+    flex: 1;
     flex-direction: column;
     gap: 8px;
 `
@@ -79,13 +110,12 @@ export function CardUser({
     nameUser,
     ageUser,
     descriptionUser,
-    examScheduling,
-    medicalRecords,
-    textCardTitle,
     schedulingTime,
     iconName,
     iconColor,
-    iconSize
+    iconSize,
+    bgColor,
+    situation
 }) {
     return (
         <CardsUser>
@@ -106,25 +136,41 @@ export function CardUser({
                 </ProfileData>
 
                 <ViewRow>
-                    <ClockCard>
-                        <AntDesign
+                    <ClockCard situation={bgColor}>
+                        <ClockIcon
                             name={iconName}
                             size={iconSize}
                             color={iconColor}
+                            situation={bgColor}
                         />
-
-                        <TextBold>
+                        <ClockTime situation={bgColor}>
                             {schedulingTime}
-                        </TextBold>
+                        </ClockTime>
                     </ClockCard>
+
+                    <ButtonCard
+                        activeOpacity={.6}
+                    >
+                        {situation == CardSituation.scheduled ? (
+                            <ButtonText
+                                situation={situation}
+                            >
+                                {"Cancelar"}
+                            </ButtonText>
+                        ) : situation == CardSituation.carriedOut ? (
+                                <ButtonText>
+                                    {"Ver Prontuário"}
+                                </ButtonText>
+                            ) : (
+                                    <>
+                                    </>
+                            )}
+
+                    </ButtonCard>
                 </ViewRow>
             </ContainerFlex>
 
-            <ButtonCard/>
-
-            {/* <CardTitle>
-                {textCardTitle}
-            </CardTitle> */}
+            <ButtonCard />
         </CardsUser>
     )
 }

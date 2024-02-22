@@ -5,11 +5,4 @@ export const FlatlistInfos = styled(FlatList)`
     width: 90%;
     margin-top:2%;
     flex: 1;
-
 `   
-
-export const ContainerFlatList = styled.ScrollView`
-    flex:1;
-    width: 90%;
-    align-items:center;
-`

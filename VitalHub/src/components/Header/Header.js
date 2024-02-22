@@ -12,8 +12,8 @@ export const BoxUser = styled.View`
 `;
 
 export const ImageUser = styled.Image`
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 5px;
 `;
 

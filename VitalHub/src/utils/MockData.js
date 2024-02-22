@@ -1,3 +1,5 @@
+import { CardSituation } from "./AppSituationCard";
+
 export const MockData = [
     {
         id: 1,
@@ -6,7 +8,8 @@ export const MockData = [
         imagem: "url_da_imagem_1",
         situacao: "urgencia",
         horario: "10:00",
-        botaoCancelar: true
+        botaoCancelar: true,
+        situation: CardSituation.scheduled
     },
     {
         id: 2,
@@ -15,7 +18,8 @@ export const MockData = [
         imagem: "url_da_imagem_2",
         situacao: "rotina",
         horario: "11:00",
-        botaoCancelar: false
+        botaoCancelar: false,
+        situation: CardSituation.canceled
     },
     {
         id: 3,
@@ -24,7 +28,8 @@ export const MockData = [
         imagem: "url_da_imagem_3",
         situacao: "consulta",
         horario: "12:00",
-        botaoCancelar: true
+        botaoCancelar: true,
+        situation: CardSituation.carriedOut
     },
     {
         id: 4,
@@ -33,7 +38,8 @@ export const MockData = [
         imagem: "url_da_imagem_4",
         situacao: "rotina",
         horario: "13:00",
-        botaoCancelar: true
+        botaoCancelar: true,
+        situation: CardSituation.canceled
     },
     {
         id: 5,
@@ -42,7 +48,8 @@ export const MockData = [
         imagem: "url_da_imagem_5",
         situacao: "urgencia",
         horario: "14:00",
-        botaoCancelar: false
+        botaoCancelar: false,
+        situation: CardSituation.carriedOut
     },
     {
         id: 6,
@@ -51,7 +58,8 @@ export const MockData = [
         imagem: "url_da_imagem_6",
         situacao: "consulta",
         horario: "15:00",
-        botaoCancelar: true
+        botaoCancelar: true,
+        situation: CardSituation.carriedOut
     },
     {
         id: 7,
@@ -60,7 +68,8 @@ export const MockData = [
         imagem: "url_da_imagem_7",
         situacao: "rotina",
         horario: "16:00",
-        botaoCancelar: false
+        botaoCancelar: false,
+        situation: CardSituation.scheduled
     },
     {
         id: 8,
@@ -69,7 +78,8 @@ export const MockData = [
         imagem: "url_da_imagem_8",
         situacao: "consulta",
         horario: "17:00",
-        botaoCancelar: true
+        botaoCancelar: true,
+        situation: CardSituation.scheduled
     },
     {
         id: 9,
@@ -78,7 +88,8 @@ export const MockData = [
         imagem: "url_da_imagem_9",
         situacao: "rotina",
         horario: "18:00",
-        botaoCancelar: true
+        botaoCancelar: true,
+        situation: CardSituation.canceled
     },
     {
         id: 10,
@@ -87,6 +98,9 @@ export const MockData = [
         imagem: "url_da_imagem_10",
         situacao: "urgencia",
         horario: "19:00",
-        botaoCancelar: false
+        botaoCancelar: false,
+        situation: CardSituation.carriedOut
     }
 ];
+
+
