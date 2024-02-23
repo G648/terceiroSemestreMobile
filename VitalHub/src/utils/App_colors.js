@@ -8,6 +8,7 @@ export const APP_COLORS = {
     secondaryV1: '#344F8F',
     secondaryV2: '#496BBA',
     secondaryV3: '#37791CF',
+    SecondaryLight: '#ECF2FF',
     grayV1: '#33303E',
     grayV2: '#4E4B59',
     grayV3: '#5F5C6B',
@@ -15,5 +16,6 @@ export const APP_COLORS = {
     grayV5: '#ACABB7',
     grayV6: '#C6C5CE',
     white: '#FAFAFA',
+    whitev1: '#FFFFFF',
     red: '#C81D25'
 }

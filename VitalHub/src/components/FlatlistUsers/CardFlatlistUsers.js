@@ -115,7 +115,8 @@ export function CardUser({
     iconColor,
     iconSize,
     bgColor,
-    situation
+    situation,
+    onPress
 }) {
     return (
         <CardsUser>
@@ -150,6 +151,7 @@ export function CardUser({
 
                     <ButtonCard
                         activeOpacity={.6}
+                        onPress={onPress}
                     >
                         {situation == CardSituation.scheduled ? (
                             <ButtonText

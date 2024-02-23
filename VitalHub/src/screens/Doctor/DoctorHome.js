@@ -10,37 +10,38 @@ import { CardUser } from '../../components/FlatlistUsers/CardFlatlistUsers';
 // import Teste from '../../components/FlatlistUsers/FlatlistUsers';
 import { MockData } from '../../utils/MockData';
 import { CardSituation } from '../../utils/AppSituationCard';
-
+import Dialogs from '../../components/Dialogs/Dialogs';
 
 const DoctorHome = () => {
-
-    const [selectedButton, setSelectedButton] = useState()
+    const [selectedButton, setSelectedButton] = useState(CardSituation.scheduled);
     const [filteredData, setFilteredData] = useState(MockData);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+   
+    const handleCardPress = () => {
+        setIsModalVisible(true);
+    };
 
     useEffect(() => {
-        if (selectedButton) {
-            let newData = [];
+        let newData = [];
 
-            switch (selectedButton) {
-                case "Agendadas":
-                    newData = MockData.filter(item => item.situation === CardSituation.scheduled);
-                    break;
-                case "Realizadas":
-                    newData = MockData.filter(item => item.situation === CardSituation.carriedOut);
-                    break;
-                case "Canceladas":
-                    newData = MockData.filter(item => item.situation === CardSituation.canceled);
-                    break;
-                default:
-                    newData = MockData;
-                    break;
-            }
-
-            setFilteredData(newData);
+        switch (selectedButton) {
+            case "Agendadas":
+                newData = MockData.filter(item => item.situation === CardSituation.scheduled);
+                break;
+            case "Realizadas":
+                newData = MockData.filter(item => item.situation === CardSituation.carriedOut);
+                break;
+            case "Canceladas":
+                newData = MockData.filter(item => item.situation === CardSituation.canceled);
+                break;
+            default:
+                newData = MockData;
+                break;
         }
-    }, [selectedButton]);
 
-    console.log(selectedButton);
+        setFilteredData(newData);
+
+    }, [selectedButton]);
 
     return (
         <Container>
@@ -85,7 +86,7 @@ const DoctorHome = () => {
                 data={filteredData}
                 renderItem={({ item }) => (
                     <CardUser
-                        imageUser={{uri: 'https://github.com/gsolivier.png'}}
+                        imageUser={{ uri: 'https://github.com/gsolivier.png' }}
                         nameUser={item.nome}
                         ageUser={item.idade}
                         descriptionUser={item.situacao}
@@ -94,13 +95,22 @@ const DoctorHome = () => {
                         schedulingTime={'14:00'}
                         key={item.id}
                         situation={item.situation}
+                        onPress={() => handleCardPress()}
                     />
                 )}
                 style={{ flex: 1 }}
                 showsVerticalScrollIndicator={false}
             />
-        </Container>
 
+            {/* Renderiza o Dialogs quando isModalVisible for true */}
+            {isModalVisible && (
+                <Dialogs
+                    isVisible={isModalVisible}
+                    closeModal={() => setIsModalVisible(false)}
+                    bgColor={APP_COLORS.grayV3}
+                />
+            )}
+        </Container>
     );
 };
 

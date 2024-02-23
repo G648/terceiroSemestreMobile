@@ -1,5 +1,5 @@
 export const CardSituation = {
-    canceled: 'canceled',
-    scheduled: 'scheduled',
-    carriedOut: 'carriedOut'
+    canceled: 'Canceladas',
+    scheduled: 'Agendadas',
+    carriedOut: 'Realizadas'
 }

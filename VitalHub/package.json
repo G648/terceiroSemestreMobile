@@ -12,6 +12,7 @@
     "@expo-google-fonts/montserrat": "^0.2.3",
     "@expo-google-fonts/montserrat-alternates": "^0.2.3",
     "@expo-google-fonts/quicksand": "^0.2.3",
+    "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "expo": "~50.0.5",
