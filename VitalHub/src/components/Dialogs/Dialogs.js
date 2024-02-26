@@ -1,57 +1,99 @@
 import React from 'react'
 import { Modal } from 'react-native'
-import {styled} from 'styled-components/native'
+import { styled } from 'styled-components/native'
 import { Title } from '../Title/Style'
+import { APP_COLORS } from '../../utils/App_colors'
+import { Button } from '../Button/Button'
+import { UnderlinedLink } from '../Links/Style'
 
-export const ContainerModal = styled.View`
-    flex:1;
-    justify-content:center;
-    align-items:center;
-    margin-top: ${({ marginTop }) => marginTop};
-`
-
-export const CenterContainer = styled(ContainerModal)`
-
-`
 
 export const ModalContainer = styled(Modal)`
-    /* padding: ${({ padding }) => padding}; */
-    /* background-color: ${({ bgColor }) => bgColor};
-    border-radius: ${({ borderRadius }) => borderRadius};
-    elevation: ${({ elevation }) => elevation};
-    align-items: ${({ alignItems }) => alignItems}; */
+`
+
+export const CenterContainer = styled.View`
+    flex: 1;
+    background-color: rgba(0,0,0,0.5);
+    align-items:center;
+    justify-content:center;
+`
+
+export const ContainerTextBox = styled.View`
+    background-color: ${APP_COLORS.white};
+    border-radius: 8px;
+    padding: 20px;
+    elevation: 20px;
 `
 
 export const TextModal = styled(Title)`
-    color: ${({colorText}) => colorText};
+    text-align:center;
+    font-size: ${({ fontSizeText = "18px" }) => fontSizeText};
+    padding-bottom: 15px;
+`
+
+export const TextParagrafModal = styled(TextModal)`
 `
 
 export default function Dialogs({
     titleContent,
     isVisible,
     closeModal,
-    // padding,
-    // borderRadius,
-    // elevation,
-    // alignItems,
-    // bgColor
+    fontSizeText,
+    fontSizeTextParagraf,
+    onPressConfirm,
+    onPressCancel,
+    customContent,
+    confirmButtonTitle,
+    showCancelButton,
+    cancelButtonTitle
 }) {
     return (
-        <ContainerModal>
-            <ModalContainer
-                visible={isVisible}
-                onRequestClose={closeModal}
-                animationType='slide'
-                // padding={padding}
-                // borderRadius={borderRadius}
-                // bgColor={bgColor}
-            >
-                <CenterContainer>
-                    <TextModal>
+        <ModalContainer
+            visible={isVisible}
+            onRequestClose={closeModal}
+            animationType='slide'
+            transparent={true}
+        >
+            <CenterContainer>
+                <ContainerTextBox>
+
+                    <TextModal
+                        fontSizeText={fontSizeText}
+                    >
                         {titleContent}
                     </TextModal>
-                </CenterContainer>
-            </ModalContainer>
-        </ContainerModal>
+
+                    <TextParagrafModal
+                        fontSizeText={fontSizeTextParagraf}
+                    >
+                        {customContent}
+                    </TextParagrafModal>
+
+
+                    <Button
+                        activeOpacity={.8}
+                        backgroundColor={APP_COLORS.secondary}
+                        border={APP_COLORS.secondary}
+                        color={APP_COLORS.white}
+                        title={confirmButtonTitle || "Confirmar"}
+                        width={320}
+                        onPress={onPressConfirm}
+                    >
+
+                    </Button>
+
+                    {showCancelButton && (
+                        <UnderlinedLink
+                            textIntput={cancelButtonTitle || "Cancelar"}
+                            ColorText={APP_COLORS.secondaryV1}
+                            buttonOpacity={.8}
+                            buttonAlign={"center"}
+                            onClick={onPressCancel}
+                        />
+                    )}
+
+                </ContainerTextBox>
+            </CenterContainer>
+        </ModalContainer>
+
     )
 } 

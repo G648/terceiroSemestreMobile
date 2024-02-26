@@ -11,12 +11,14 @@ import { CardUser } from '../../components/FlatlistUsers/CardFlatlistUsers';
 import { MockData } from '../../utils/MockData';
 import { CardSituation } from '../../utils/AppSituationCard';
 import Dialogs from '../../components/Dialogs/Dialogs';
+import { Text } from 'react-native';
 
 const DoctorHome = () => {
     const [selectedButton, setSelectedButton] = useState(CardSituation.scheduled);
     const [filteredData, setFilteredData] = useState(MockData);
     const [isModalVisible, setIsModalVisible] = useState(false);
-   
+    const [modalContent, setModalContent] = useState(null)
+
     const handleCardPress = () => {
         setIsModalVisible(true);
     };
@@ -41,6 +43,26 @@ const DoctorHome = () => {
 
         setFilteredData(newData);
 
+    }, [selectedButton]);
+
+
+    useEffect(() => {
+        // Definindo o conteúdo do modal com base na seleção do botão "Realizadas"
+        if (selectedButton === "Realizadas") {
+            setModalContent(
+                // <Dialogs
+                //     confirmButtonTitle={"Inserir prontuário"}
+                // >
+
+                // </Dialogs>
+            );
+        } else {
+            setModalContent(
+                <Text>
+                    Ao cancelar essa consulta, abrirá uma possível disponibilidade no seu horário, deseja mesmo cancelar essa consulta?
+                </Text>
+            ); // Limpa o conteúdo do modal se outro botão for selecionado
+        }
     }, [selectedButton]);
 
     return (
@@ -106,8 +128,15 @@ const DoctorHome = () => {
             {isModalVisible && (
                 <Dialogs
                     isVisible={isModalVisible}
-                    closeModal={() => setIsModalVisible(false)}
-                    bgColor={APP_COLORS.grayV3}
+                    bgColor={APP_COLORS.grayV6}
+                    titleContent={"Cancelar consulta"}
+                    customContent={modalContent}
+                    paragrafCancel={""}
+                    fontSizeText={"22px"}
+                    fontSizeTextParagraf={"15px"}
+                    onPressConfirm={() => { setIsModalVisible(false) }}
+                    onPressCancel={() => { setIsModalVisible(false) }}
+                    showCancelButton={true}
                 />
             )}
         </Container>

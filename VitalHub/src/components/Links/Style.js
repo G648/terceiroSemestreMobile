@@ -10,6 +10,7 @@ margin-left: 20px;
 text-decoration: underline;
 margin-bottom: 15px;
 color: ${props => props.ColorText};
+text-align:center;
 `
 
 export const ButtonLink = styled.TouchableOpacity`
