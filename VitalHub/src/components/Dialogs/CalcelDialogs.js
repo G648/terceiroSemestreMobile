@@ -33,7 +33,7 @@ export const TextModal = styled(Title)`
 export const TextParagrafModal = styled(TextModal)`
 `
 
-export default function Dialogs({
+export default function CancelDialogs({
     titleContent,
     isVisible,
     closeModal,

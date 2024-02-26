@@ -10,17 +10,19 @@ import { CardUser } from '../../components/FlatlistUsers/CardFlatlistUsers';
 // import Teste from '../../components/FlatlistUsers/FlatlistUsers';
 import { MockData } from '../../utils/MockData';
 import { CardSituation } from '../../utils/AppSituationCard';
-import Dialogs from '../../components/Dialogs/Dialogs';
-import { Text } from 'react-native';
+import CancelDialogs from '../../components/Dialogs/CalcelDialogs';
+import { SeeMedicalDialog } from '../../components/Dialogs/SeeMedicalDialog';
 
 const DoctorHome = () => {
     const [selectedButton, setSelectedButton] = useState(CardSituation.scheduled);
     const [filteredData, setFilteredData] = useState(MockData);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [modalContent, setModalContent] = useState(null)
+    const [isModalCancel, setIsModalCancel] = useState(false);
+    const [isModalMedical, setisModalMedical] = useState(false)
+    const [selectedUserData, setSelectedUserData] = useState(null)
 
-    const handleCardPress = () => {
-        setIsModalVisible(true);
+    const handleCardPress = (selectedSituation, userData) => {
+        selectedSituation == "Agendadas" ? setIsModalCancel(true) : setisModalMedical(true)
+        setSelectedUserData(userData)
     };
 
     useEffect(() => {
@@ -43,26 +45,6 @@ const DoctorHome = () => {
 
         setFilteredData(newData);
 
-    }, [selectedButton]);
-
-
-    useEffect(() => {
-        // Definindo o conteúdo do modal com base na seleção do botão "Realizadas"
-        if (selectedButton === "Realizadas") {
-            setModalContent(
-                // <Dialogs
-                //     confirmButtonTitle={"Inserir prontuário"}
-                // >
-
-                // </Dialogs>
-            );
-        } else {
-            setModalContent(
-                <Text>
-                    Ao cancelar essa consulta, abrirá uma possível disponibilidade no seu horário, deseja mesmo cancelar essa consulta?
-                </Text>
-            ); // Limpa o conteúdo do modal se outro botão for selecionado
-        }
     }, [selectedButton]);
 
     return (
@@ -108,7 +90,7 @@ const DoctorHome = () => {
                 data={filteredData}
                 renderItem={({ item }) => (
                     <CardUser
-                        imageUser={{ uri: 'https://github.com/gsolivier.png' }}
+                        imageUser={{ uri: item.imagem }}
                         nameUser={item.nome}
                         ageUser={item.idade}
                         descriptionUser={item.situacao}
@@ -117,7 +99,7 @@ const DoctorHome = () => {
                         schedulingTime={'14:00'}
                         key={item.id}
                         situation={item.situation}
-                        onPress={() => handleCardPress()}
+                        onPress={() => handleCardPress(selectedButton)}
                     />
                 )}
                 style={{ flex: 1 }}
@@ -125,18 +107,28 @@ const DoctorHome = () => {
             />
 
             {/* Renderiza o Dialogs quando isModalVisible for true */}
-            {isModalVisible && (
-                <Dialogs
-                    isVisible={isModalVisible}
+            {isModalCancel && (
+                <CancelDialogs
+                    isVisible={isModalCancel}
                     bgColor={APP_COLORS.grayV6}
                     titleContent={"Cancelar consulta"}
-                    customContent={modalContent}
-                    paragrafCancel={""}
+                    customContent={"Ao cancelar essa consulta, abrirá uma possível disponibilidade no seu horário, deseja mesmo cancelar essa consulta?"}
                     fontSizeText={"22px"}
                     fontSizeTextParagraf={"15px"}
-                    onPressConfirm={() => { setIsModalVisible(false) }}
-                    onPressCancel={() => { setIsModalVisible(false) }}
+                    onPressConfirm={() => { setIsModalCancel(false) }}
+                    onPressCancel={() => { setIsModalCancel(false) }}
                     showCancelButton={true}
+                />
+            )}
+
+            {isModalMedical &&  selectedUserData &&  (
+                <SeeMedicalDialog
+                    isVisible={isModalMedical}
+                    nameUser={selectedUserData.nome}
+                    ageUser={selectedUserData.idade}
+                    emailuser={selectedUserData.email}
+                    onPressCancel={() => setisModalMedical(false)}
+
                 />
             )}
         </Container>
