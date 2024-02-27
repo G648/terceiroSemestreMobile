@@ -13,12 +13,12 @@ import { CardSituation } from '../../utils/AppSituationCard';
 import CancelDialogs from '../../components/Dialogs/CalcelDialogs';
 import { SeeMedicalDialog } from '../../components/Dialogs/SeeMedicalDialog';
 
-const DoctorHome = () => {
+const DoctorHome = ({ navigation }) => {
     const [selectedButton, setSelectedButton] = useState(CardSituation.scheduled);
     const [filteredData, setFilteredData] = useState(MockData);
     const [isModalCancel, setIsModalCancel] = useState(false);
     const [isModalMedical, setisModalMedical] = useState(false)
-    const [selectedUserData, setSelectedUserData] = useState(null)
+    const [selectedUserData, setSelectedUserData] = useState({})
 
     const handleCardPress = (selectedSituation, userData) => {
         selectedSituation == "Agendadas" ? setIsModalCancel(true) : setisModalMedical(true)
@@ -99,7 +99,7 @@ const DoctorHome = () => {
                         schedulingTime={'14:00'}
                         key={item.id}
                         situation={item.situation}
-                        onPress={() => handleCardPress(selectedButton)}
+                        onPress={() => handleCardPress(selectedButton, item)}
                     />
                 )}
                 style={{ flex: 1 }}
@@ -118,19 +118,31 @@ const DoctorHome = () => {
                     onPressConfirm={() => { setIsModalCancel(false) }}
                     onPressCancel={() => { setIsModalCancel(false) }}
                     showCancelButton={true}
-                />
-            )}
-
-            {isModalMedical &&  selectedUserData &&  (
-                <SeeMedicalDialog
-                    isVisible={isModalMedical}
-                    nameUser={selectedUserData.nome}
-                    ageUser={selectedUserData.idade}
-                    emailuser={selectedUserData.email}
-                    onPressCancel={() => setisModalMedical(false)}
 
                 />
             )}
+
+            <SeeMedicalDialog
+                isVisible={isModalMedical}
+                showCancelButton={true}
+                onPressCancel={() => setisModalMedical(false)}
+                imageUser={{ uri: selectedUserData.imagem }}
+                heightImageUser={250}
+                widthImageUser={320}
+                nameUser={selectedUserData.nome}
+                ageUser={`${selectedUserData.idade} anos`}
+                emailuser={selectedUserData.email}
+                onPress={() => {
+                    navigation.navigate('MedicalRecord');
+                    setisModalMedical(false);
+                    //enviar os dados para a página de medicalRecords
+                    navigation.navigate("MedicalRecord", {userData: selectedUserData})
+                }}
+
+                widtContainerInfoUser={280}
+                marginBottomName={"30px"}
+            />
+
         </Container>
     );
 };

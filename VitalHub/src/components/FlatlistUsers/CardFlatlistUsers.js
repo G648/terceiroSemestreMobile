@@ -36,6 +36,7 @@ export const ProfileName = styled.Text`
     color: #33303e;
     font-family: "MontserratAlternates_600SemiBold";
     font-size: 20px ;
+    margin-bottom: ${({marginBottomName = "0px"}) => marginBottomName};
 `
 
 export const ProfileData = styled.View`
@@ -116,7 +117,8 @@ export function CardUser({
     iconSize,
     bgColor,
     situation,
-    onPress
+    onPress,
+    marginBottomName
 }) {
     return (
         <CardsUser>
@@ -127,7 +129,9 @@ export function CardUser({
 
             <ContainerFlex>
 
-                <ProfileName>
+                <ProfileName
+                    marginBottomName={marginBottomName}
+                >
                     {nameUser}
                 </ProfileName>
 

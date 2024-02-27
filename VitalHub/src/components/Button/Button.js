@@ -16,6 +16,8 @@ export const TitleStyle = styled.Text`
     font-family: "MontserratAlternates_700Bold";
     height: 20px;
     color: ${({ color }) => color};
+    margin-top: -4px;
+    font-size: ${({fontSizeTextButtom = "16px"}) => fontSizeTextButtom};
 `
 
 export const ButtonFlex = styled.View`

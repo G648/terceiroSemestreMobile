@@ -10,6 +10,8 @@ import { VerificaEmail } from './src/screens/Auth/VerificaEmail/VerificaEmail';
 import CadastroUser from './src/screens/Auth/CadastroUser/CadastroUser';
 import DoctorHome from './src/screens/Doctor/DoctorHome';
 import { BottomTabNavigation } from './src/settings/Routes/AppTabNavigationDoctor';
+import MedicalRecord from './src/screens/Doctor/MedicalRecord';
+import { MockData } from './src/utils/MockData';
 
 
 export default function App() {
@@ -45,6 +47,12 @@ export default function App() {
           name='Home'
           component={BottomTabNavigation}
           options={{ title: 'Home' }}
+        />
+
+        <Stack.Screen
+          name='MedicalRecord'
+          component={MedicalRecord}
+          options={{title: 'MedicalRecord'}}
         />
 
         <Stack.Screen

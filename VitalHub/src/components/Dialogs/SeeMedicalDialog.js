@@ -3,16 +3,25 @@ import { CenterContainer, ContainerTextBox, ModalContainer, TextModal } from "./
 import { ProfileImage, ProfileName } from "../FlatlistUsers/CardFlatlistUsers";
 import { Button } from "../Button/Button";
 import { APP_COLORS } from "../../utils/App_colors";
+import { UnderlinedLink } from "../Links/Style";
 
 
 export const ContainerInfoUser = styled.View`
     flex-direction: row;
     width: ${({ widtContainerInfoUser }) => widtContainerInfoUser};
     justify-content: space-between;
+    margin-bottom: 40px;
 `
 
 export const Infouser = styled.Text`
-    font-size: ${({ fontSizeAge }) => fontSizeAge};
+    font-size: ${({ fontSizeAge = "16px" }) => fontSizeAge};
+`
+
+export const ProfileImageModal = styled.Image`
+    width: ${({ widthImageUser = "60px" }) => widthImageUser};
+    height: ${({ heightImageUser = "60px" }) => heightImageUser};
+    border-radius: 8px;
+    margin-bottom: 25px;
 `
 
 export function SeeMedicalDialog({
@@ -26,7 +35,9 @@ export function SeeMedicalDialog({
     emailuser,
     onPress,
     onPressCancel,
-    showCancelButton
+    showCancelButton,
+    widtContainerInfoUser,
+    marginBottomName
 }) {
     return (
         <ModalContainer
@@ -37,18 +48,22 @@ export function SeeMedicalDialog({
         >
             <CenterContainer>
                 <ContainerTextBox>
-                    <ProfileImage
+                    <ProfileImageModal
                         source={imageUser}
-                        width={widthImageUser}
-                        height={heightImageUser}
+                        widthImageUser={widthImageUser}
+                        heightImageUser={heightImageUser}
                     />
 
-                    <ProfileName>
+                    <ProfileName
+                         marginBottomName={marginBottomName}
+                    >
                         {nameUser}
                     </ProfileName>
 
 
-                    <ContainerInfoUser>
+                    <ContainerInfoUser
+                        widtContainerInfoUser={widtContainerInfoUser}
+                    >
                         <Infouser>
                             {ageUser}
                         </Infouser>

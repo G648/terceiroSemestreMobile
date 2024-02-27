@@ -20,8 +20,8 @@ export const CenterContainer = styled.View`
 export const ContainerTextBox = styled.View`
     background-color: ${APP_COLORS.white};
     border-radius: 8px;
-    padding: 20px;
-    elevation: 20px;
+    padding: ${({padding = "25px"}) => padding};
+    align-items: ${({alignItemsContainer = "center"}) => alignItemsContainer};
 `
 
 export const TextModal = styled(Title)`
@@ -44,7 +44,9 @@ export default function CancelDialogs({
     customContent,
     confirmButtonTitle,
     showCancelButton,
-    cancelButtonTitle
+    cancelButtonTitle,
+    alignItemsContainer,
+    paddingTitle
 }) {
     return (
         <ModalContainer
@@ -54,7 +56,10 @@ export default function CancelDialogs({
             transparent={true}
         >
             <CenterContainer>
-                <ContainerTextBox>
+                <ContainerTextBox
+                    padding={paddingTitle}
+                    alignItemsContainer={alignItemsContainer}
+                >
 
                     <TextModal
                         fontSizeText={fontSizeText}
