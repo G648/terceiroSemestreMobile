@@ -15,6 +15,7 @@ text-align:center;
 
 export const ButtonLink = styled.TouchableOpacity`
     align-self: ${props => props.AlignSelf};
+    margin-right: 18px;
 `
 
 export function UnderlinedLink({

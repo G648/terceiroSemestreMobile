@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from '../../components/Header/Header'
 import { useRoute } from '@react-navigation/native';
 import { ContainerInfoUser, Infouser, ProfileImageModal } from '../../components/Dialogs/SeeMedicalDialog';
@@ -6,11 +6,14 @@ import { ContainerTextBox } from '../../components/Dialogs/CalcelDialogs';
 import { ProfileName } from '../../components/FlatlistUsers/CardFlatlistUsers';
 import styled from 'styled-components/native';
 import { APP_COLORS } from '../../utils/App_colors';
+import { Button } from '../../components/Button/Button';
+import { UnderlinedLink } from '../../components/Links/Style';
 
 
 export const ContainerViewUserInfo = styled.View`
     width: 100%;
     height: 100%;
+    /* gap: 80px; */
 `
 
 export const ScrollViewContainer = styled.ScrollView`
@@ -29,20 +32,28 @@ export const InputStyle = styled.TextInput`
     width: ${({ boxWidth = '90px' }) => boxWidth};
     height: ${({ boxHeigth = "40px" }) => boxHeigth};
     border-width: 2px;
-    border-color: ${({ borderColor = "black" }) => borderColor};
+    border-color: ${({ isEditable }) => (isEditable ? APP_COLORS.primary : APP_COLORS.lightGray)};
     border-radius: 8px;
+    padding: 20px;
+    background-color: ${({ isEditable }) => (isEditable ? "transparent" : APP_COLORS.lightGray)};
+    margin-bottom: ${({ marginBottom = "40px" }) => marginBottom};
+    margin-top: ${({ marginTop = "20px" }) => marginTop};
 `
 
-export default function MedicalRecord({
-    fontColor,
-    fontSize,
-    boxWidth,
-    boxHeigth,
-    borderColor
-}) {
+export default function MedicalRecord({ navigation }) {
 
     const route = useRoute();
     const userData = route.params.userData;
+
+    const [isEditable, setIsEditable] = useState(false); // Estado de edição dos inputs
+
+    const toggleEdit = () => {
+        setIsEditable(prevState => !prevState); // Alterna entre editável e não editável
+    };
+
+    const handleSave = () => {
+        setIsEditable(false); // Define todos os inputs como não editáveis ao salvar
+    };
 
     return (
         <Container>
@@ -76,26 +87,86 @@ export default function MedicalRecord({
             </ContainerTextBox>
 
             {/*  Scroll view para informações do user */}
-            <ScrollViewContainer>
+            <ScrollViewContainer
+                showsVerticalScrollIndicator={false}
+            >
                 <ContainerViewUserInfo>
+                    <TextLabel>
+                        Descrição da consulta
+                    </TextLabel>
                     <InputStyle
+                        placeholderTextColor={APP_COLORS.primaryV1}
                         boxHeigth={'200px'}
-                        boxWidth= {"100%"}
+                        boxWidth={"100%"}
                         borderColor={APP_COLORS.primary}
                         placeholder='Descrição'
+                        textAlignVertical='top'
+                        editable={isEditable}
+                        isEditable={isEditable}
                     />
+
+                    <TextLabel>
+                        Diagnóstico do paciente
+                    </TextLabel>
                     <InputStyle
-                        boxHeigth={'100px'}
-                        boxWidth= {"100%"}
+                        placeholderTextColor={APP_COLORS.primaryV1}
+                        boxHeigth={'80px'}
+                        boxWidth={"100%"}
                         borderColor={APP_COLORS.primary}
-                        placeholder='diagnostico'
+                        placeholder='Prescrição médica'
+                        textAlignVertical='center'
+                        editable={isEditable}
+                        isEditable={isEditable}
                     />
+
+                    <TextLabel>
+                        Prescrição médica
+                    </TextLabel>
                     <InputStyle
+                        placeholderTextColor={APP_COLORS.primaryV1}
                         boxHeigth={'200px'}
-                        boxWidth= {"100%"}
+                        boxWidth={"100%"}
                         borderColor={APP_COLORS.primary}
                         placeholder='Descrição'
+                        textAlignVertical='top'
+                        editable={isEditable}
+                        isEditable={isEditable}
                     />
+
+                    {!isEditable && ( // Renderiza o botão de editar apenas quando os inputs não estiverem editáveis
+                        <Button
+                            width={"100%"}
+                            activeOpacity={.6}
+                            backgroundColor={APP_COLORS.secondary}
+                            border={APP_COLORS.secondary}
+                            color={APP_COLORS.white}
+                            title={"Editar"}
+                            marginTop={30}
+                            onPress={toggleEdit}
+                        />
+                    )}
+
+                    {isEditable && ( // Renderiza o botão de salvar apenas quando os inputs estiverem editáveis
+                        <Button
+                            width={"100%"}
+                            activeOpacity={.6}
+                            backgroundColor={APP_COLORS.secondary}
+                            border={APP_COLORS.secondary}
+                            color={APP_COLORS.white}
+                            title={"Salvar"}
+                            marginTop={-10}
+                            onPress={handleSave}
+                        />
+                    )}
+
+                    <UnderlinedLink
+                        textIntput={"Cancelar"}
+                        ColorText={APP_COLORS.secondaryV1}
+                        buttonOpacity={.6}
+                        onClick={() => { navigation.navigate("Home") }}
+
+                    />
+
                 </ContainerViewUserInfo>
             </ScrollViewContainer>
 

@@ -15,6 +15,7 @@ export const APP_COLORS = {
     grayV4: '#7A7786',
     grayV5: '#ACABB7',
     grayV6: '#C6C5CE',
+    lightGray: '#F5F3F3',
     white: '#FAFAFA',
     whitev1: '#FFFFFF',
     red: '#C81D25'
