@@ -5,6 +5,8 @@ import styled from 'styled-components/native'
 import { APP_COLORS } from '../../utils/App_colors'
 import { ContainerViewUserInfo, InputStyle, TextLabel } from './MedicalRecord'
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Entypo } from '@expo/vector-icons';
+import { Pressable, Platform } from 'react-native'
 
 export const DoctorContainerInfos = styled.View`
   width: 80%;
@@ -29,10 +31,29 @@ export const DoctorEmail = styled(DoctorName)`
   margin-top: 20px;
 `
 
-export default function DoctorProfile() {
+export const Calendar = styled(Entypo)`
+  position: absolute;
+  /* bottom: 2px; */
+  top: 7.2%;
+  left: 90%;
+`
 
+export default function DoctorProfile({
+  onPress
+}) {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
+  const [dateOfBirth, setDateOfBirth] = useState("")
+
+  const formatDate = (rawDate) => {
+    let date = new Date(rawDate)
+
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+
+    return `${day}/${month}/${year}`
+  }
 
   const toggleDatePicker = () => {
     setOpen(!open);
@@ -42,6 +63,12 @@ export default function DoctorProfile() {
     if (type == "set") {
       const currentDate = selectedDate;
       setDate(currentDate)
+
+      if (Platform.OS === "android") {
+        toggleDatePicker()
+
+        setDateOfBirth(formatDate(currentDate));
+      }
     } else {
       toggleDatePicker()
     }
@@ -68,31 +95,68 @@ export default function DoctorProfile() {
         </DataUser>
       </DoctorContainerInfos>
 
-      <ContainerViewUserInfo>
+      <ContainerViewUserInfo
+        width={"90%"}
+      >
         <TextLabel>
           Data de nascimento
         </TextLabel>
-
-        {/* <Button title={"selecionar data"} onPress={() => setOpen(true)} /> */}
-
-        {/* <DatePicker date={date} onDateChange={setDate} /> */}
 
         {open && (
 
           <DateTimePicker
             mode='date'
-            display='spinner'
+            display='inline'
             value={date}
             onChange={onChange}
+
           />
         )}
 
+        {!open && (
+
+          <Pressable
+            onPress={toggleDatePicker}
+          >
+            <InputStyle
+              placeholder='03/08/02'
+              value={dateOfBirth}
+              onChangeText={setDateOfBirth}
+              placeholderTextColor={APP_COLORS.primaryV1}
+              boxHeigth={'60px'}
+              boxWidth={"100%"}
+              borderColor={APP_COLORS.primary}
+              editable={false}
+            />
+          </Pressable>
+        )}
+
+        <Calendar
+          name="calendar"
+          size={24}
+          color={APP_COLORS.primaryV1}
+        />
+
+        <TextLabel>
+          CPF
+        </TextLabel>
+
         <InputStyle
-          placeholder='03/08/02'
-          onChangeText={setOpen}
+          placeholder='859*********'
           placeholderTextColor={APP_COLORS.primaryV1}
           boxHeigth={'60px'}
-          boxWidth={"90%"}
+          boxWidth={"100%"}
+          borderColor={APP_COLORS.primary}
+        />
+        <TextLabel>
+          Endereço
+        </TextLabel>
+
+        <InputStyle
+          placeholder='Rua Vicenso Silva, 987'
+          placeholderTextColor={APP_COLORS.primaryV1}
+          boxHeigth={'60px'}
+          boxWidth={"100%"}
           borderColor={APP_COLORS.primary}
         />
 

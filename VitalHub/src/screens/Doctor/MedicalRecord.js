@@ -11,9 +11,8 @@ import { UnderlinedLink } from '../../components/Links/Style';
 
 
 export const ContainerViewUserInfo = styled.View`
-    width: 100%;
+    width: ${({width = '100%'}) => width};
     height: 100%;
-    /* gap: 80px; */
 `
 
 export const ScrollViewContainer = styled.ScrollView`
