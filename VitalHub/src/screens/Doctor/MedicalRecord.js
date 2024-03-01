@@ -37,6 +37,7 @@ export const InputStyle = styled.TextInput`
     background-color: ${({ isEditable }) => (isEditable ? "transparent" : APP_COLORS.lightGray)};
     margin-bottom: ${({ marginBottom = "40px" }) => marginBottom};
     margin-top: ${({ marginTop = "20px" }) => marginTop};
+    font-family: "MontserratAlternates_500Medium";
 `
 
 export default function MedicalRecord({ navigation }) {

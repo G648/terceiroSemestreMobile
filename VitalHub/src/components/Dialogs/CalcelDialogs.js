@@ -15,17 +15,21 @@ export const CenterContainer = styled.View`
     background-color: rgba(0,0,0,0.5);
     align-items:center;
     justify-content:center;
+    justify-content: ${({ justifyContent = "center" }) => justifyContent};
 `
 
 export const ContainerTextBox = styled.View`
     background-color: ${APP_COLORS.white};
     border-radius: 8px;
-    padding: ${({padding = "25px"}) => padding};
-    align-items: ${({alignItemsContainer = "center"}) => alignItemsContainer};
+    padding: ${({ padding = "25px" }) => padding};
+    align-items: ${({ alignItemsContainer = "center" }) => alignItemsContainer};
+    height: ${({ heightModal }) => heightModal};
+    width: ${({ widthModal }) => widthModal};
+    
 `
 
 export const TextModal = styled(Title)`
-    text-align:center;
+    text-align: center;
     font-size: ${({ fontSizeText = "18px" }) => fontSizeText};
     padding-bottom: 15px;
 `

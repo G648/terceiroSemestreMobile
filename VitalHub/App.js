@@ -12,6 +12,7 @@ import DoctorHome from './src/screens/Doctor/DoctorHome';
 import { BottomTabNavigation } from './src/settings/Routes/AppTabNavigationDoctor';
 import MedicalRecord from './src/screens/Doctor/MedicalRecord';
 import { MockData } from './src/utils/MockData';
+import PatientHome from './src/screens/Patient/PatientHome';
 
 
 export default function App() {
@@ -42,6 +43,12 @@ export default function App() {
     <NavigationContainer>
       {/* Componente para navegação */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+
+      <Stack.Screen
+        name='HomePatient'
+        component={PatientHome}
+        options={{title: 'HomePatient'}}
+      />
 
         <Stack.Screen
           name='Home'

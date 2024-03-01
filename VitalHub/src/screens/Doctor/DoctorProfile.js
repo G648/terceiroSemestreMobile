@@ -3,10 +3,12 @@ import { Container, DataUser } from '../../components/Header/Header'
 import { ProfileImageModal } from '../../components/Dialogs/SeeMedicalDialog'
 import styled from 'styled-components/native'
 import { APP_COLORS } from '../../utils/App_colors'
-import { ContainerViewUserInfo, InputStyle, TextLabel } from './MedicalRecord'
+import { ContainerViewUserInfo, InputStyle, ScrollViewContainer, TextLabel } from './MedicalRecord'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Entypo } from '@expo/vector-icons';
 import { Pressable, Platform } from 'react-native'
+import { Button } from '../../components/Button/Button'
+import { UnderlinedLink } from '../../components/Links/Style'
 
 export const DoctorContainerInfos = styled.View`
   width: 80%;
@@ -16,6 +18,7 @@ export const DoctorContainerInfos = styled.View`
   background-color: ${APP_COLORS.white};
   border-radius: 8px;
   elevation: 10px;
+
 `
 
 export const DoctorName = styled.Text`
@@ -34,16 +37,34 @@ export const DoctorEmail = styled(DoctorName)`
 export const Calendar = styled(Entypo)`
   position: absolute;
   /* bottom: 2px; */
-  top: 7.2%;
+  top: 9%;
   left: 90%;
 `
 
+export const InfosContainer = styled.View`
+  flex-direction: row;
+  justify-content:space-between;
+`
+
+export const InfosColumn = styled.View`
+  flex-direction:column;
+  width: 45%;
+`
+
 export default function DoctorProfile({
-  onPress
 }) {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
   const [dateOfBirth, setDateOfBirth] = useState("")
+  const [isEditable, setIsEditable] = useState(false); // Estado de edição dos inputs
+
+  const toggleEdit = () => {
+    setIsEditable(prevState => !prevState); // Alterna entre editável e não editável
+  };
+
+  const handleSave = () => {
+    setIsEditable(false); // Define todos os inputs como não editáveis ao salvar
+  };
 
   const formatDate = (rawDate) => {
     let date = new Date(rawDate)
@@ -95,8 +116,9 @@ export default function DoctorProfile({
         </DataUser>
       </DoctorContainerInfos>
 
-      <ContainerViewUserInfo
+      <ScrollViewContainer
         width={"90%"}
+        showsVerticalScrollIndicator={false}
       >
         <TextLabel>
           Data de nascimento
@@ -109,15 +131,15 @@ export default function DoctorProfile({
             display='inline'
             value={date}
             onChange={onChange}
-
+            editable={isEditable}
+            isEditable={isEditable}
           />
         )}
 
         {!open && (
 
           <Pressable
-            onPress={toggleDatePicker}
-          >
+            onPress={toggleDatePicker}>
             <InputStyle
               placeholder='03/08/02'
               value={dateOfBirth}
@@ -126,7 +148,8 @@ export default function DoctorProfile({
               boxHeigth={'60px'}
               boxWidth={"100%"}
               borderColor={APP_COLORS.primary}
-              editable={false}
+              editable={isEditable}
+              isEditable={isEditable}
             />
           </Pressable>
         )}
@@ -147,6 +170,8 @@ export default function DoctorProfile({
           boxHeigth={'60px'}
           boxWidth={"100%"}
           borderColor={APP_COLORS.primary}
+          editable={isEditable}
+          isEditable={isEditable}
         />
         <TextLabel>
           Endereço
@@ -158,9 +183,74 @@ export default function DoctorProfile({
           boxHeigth={'60px'}
           boxWidth={"100%"}
           borderColor={APP_COLORS.primary}
+          editable={isEditable}
+          isEditable={isEditable}
         />
 
-      </ContainerViewUserInfo>
+
+        <InfosContainer>
+          <InfosColumn>
+            <TextLabel>
+              CEP
+            </TextLabel>
+            <InputStyle
+              boxWidth={"100%"}
+              boxHeigth={"60px"}
+              editable={isEditable}
+              isEditable={isEditable}
+            />
+          </InfosColumn>
+
+          <InfosColumn>
+            <TextLabel>
+              Cidade
+            </TextLabel>
+            <InputStyle
+              boxWidth={"100%"}
+              boxHeigth={"60px"}
+              editable={isEditable}
+              isEditable={isEditable}
+            />
+          </InfosColumn>
+        </InfosContainer>
+
+
+
+        {!isEditable && ( // Renderiza o botão de editar apenas quando os inputs não estiverem editáveis
+          <Button
+            width={"100%"}
+            activeOpacity={.6}
+            backgroundColor={APP_COLORS.secondary}
+            border={APP_COLORS.secondary}
+            color={APP_COLORS.white}
+            title={"Editar"}
+            // marginTop={30}
+            onPress={toggleEdit}
+          />
+        )}
+
+        {isEditable && ( // Renderiza o botão de salvar apenas quando os inputs estiverem editáveis
+          <Button
+            width={"100%"}
+            activeOpacity={.6}
+            backgroundColor={APP_COLORS.secondary}
+            border={APP_COLORS.secondary}
+            color={APP_COLORS.white}
+            title={"Salvar"}
+            // marginTop={-10}
+            onPress={handleSave}
+          />
+        )}
+
+        <UnderlinedLink
+          textIntput={"Cancelar"}
+          ColorText={APP_COLORS.secondaryV1}
+          buttonOpacity={.6}
+          onClick={handleSave}
+
+        />
+
+      </ScrollViewContainer>
 
     </Container>
   )
