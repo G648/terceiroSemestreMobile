@@ -118,7 +118,6 @@ const DoctorHome = ({ navigation }) => {
                     onPressConfirm={() => { setIsModalCancel(false) }}
                     onPressCancel={() => { setIsModalCancel(false) }}
                     showCancelButton={true}
-
                 />
             )}
 

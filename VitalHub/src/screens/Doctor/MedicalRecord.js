@@ -13,6 +13,7 @@ import { UnderlinedLink } from '../../components/Links/Style';
 export const ContainerViewUserInfo = styled.View`
     width: ${({width = '100%'}) => width};
     height: 100%;
+    border: 2px;
 `
 
 export const ScrollViewContainer = styled.ScrollView`
@@ -25,6 +26,9 @@ export const TextLabel = styled.Text`
     color: ${({ fontColor = "black" }) => fontColor};
     font-family:  'Quicksand_600SemiBold';
     font-size: ${({ fontSize = "16px" }) => fontSize};
+    text-align: start;
+    width: 100%;
+    margin-bottom: ${({marginBottom}) => marginBottom};
 `
 
 export const InputStyle = styled.TextInput`

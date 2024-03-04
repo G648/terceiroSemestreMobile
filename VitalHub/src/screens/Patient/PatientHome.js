@@ -13,9 +13,7 @@ import { DoctorData } from '../../utils/MockDataDoctor';
 import CancelDialogs from '../../components/Dialogs/CalcelDialogs';
 import { FontAwesome5 } from '@expo/vector-icons';
 import styled from 'styled-components/native';
-import { SeeMedicalDialog } from '../../components/Dialogs/SeeMedicalDialog';
 import ScheduleAppointment from '../../components/Dialogs/ScheduleAppointment';
-import { ScrollViewContainer, TextLabel } from '../Doctor/MedicalRecord';
 
 
 export const ScheduledButton = styled.TouchableOpacity`
@@ -26,23 +24,24 @@ export const ScheduledButton = styled.TouchableOpacity`
     border-radius: 8px;
     elevation: 9px;
     position: absolute;
-    bottom: 8%; /* Ajuste conforme necessário */
+    bottom: 2%; /* Ajuste conforme necessário */
     left: 80%;
     align-items: center;
     justify-content: center;
 `
 
-export default function PatientHome({ navigation }) {
+const PatientHome = ({ navigation }) => {
 
     const data = [
-        {key:'1', value:'CheckUp'},
-        {key:'2', value:'routine'}
+        { key: '1', value: 'CheckUp' },
+        { key: '2', value: 'routine' }
     ]
 
     const [selectedButton, setSelectedButton] = useState(CardSituation.scheduled);
     const [filteredData, setFilteredData] = useState(DoctorData);
     const [isModalCancel, setIsModalCancel] = useState(false);
     const [isModalMedical, setisModalMedical] = useState(false)
+    const [isModalScheduleVisible, setIsModalScheduleVisible] = useState(false);
     const [selectedUserData, setSelectedUserData] = useState({})
     const [selectedInput, setSelectedInput] = useState("")
 
@@ -149,6 +148,7 @@ export default function PatientHome({ navigation }) {
 
             <ScheduledButton
                 activeOpacity={.8}
+                onPress={() => setIsModalScheduleVisible(true)}
             >
                 <FontAwesome5
                     name="stethoscope"
@@ -156,23 +156,29 @@ export default function PatientHome({ navigation }) {
                     color={APP_COLORS.white}
                 />
             </ScheduledButton>
-
-            <ScheduleAppointment
-                widthModal={"100%"}
-                heightModal={600}
-                titleContent={"Agendar consulta"}
-                justifyContentModal={'flex-end'}
-                fontSizeText={25}
-                placeholder={"tipo de consulta"}
-                mockdata={data}
-                save={"value"}
-                setSelectedType={setSelectedInput}
-                onSelected={selectedInput}
-            >
-            
-            </ScheduleAppointment>
-
+            {isModalScheduleVisible &&
+                <ScheduleAppointment
+                    widthModal={"100%"}
+                    heightModal={600}
+                    titleContent={"Agendar consulta"}
+                    justifyContentModal={'flex-end'}
+                    fontSizeText={25}
+                    placeholder={"tipo de consulta"}
+                    mockdata={data}
+                    save={"value"}
+                    setSelectedType={setSelectedInput}
+                    onSelected={selectedInput}
+                    cancelDialog={() => setIsModalScheduleVisible(false)}
+                    onClick={() => {
+                        navigation.navigate('ChooseClinic')
+                        setIsModalScheduleVisible(false)
+                        
+                    }}
+                />
+            }
 
         </Container>
     )
 }
+
+export default PatientHome;

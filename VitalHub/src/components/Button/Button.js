@@ -5,7 +5,7 @@ export const ButtonStyle = styled.TouchableOpacity`
     border-color: ${({ border }) => border};
     border-width: 2px;
     width:${({ width = '90%' }) => width};
-    height: 44px;
+    height: ${({height = '44px'}) => height};
     border-radius: 5px;
     margin-top: ${({ marginTop }) => `${marginTop}px`};
     padding: 12px 8px 12px 8px;
@@ -33,7 +33,8 @@ export function Button({
     marginTop,
     onPress,
     activeOpacity,
-    width
+    width,
+    height
 }) {
     return (
         <ButtonStyle
@@ -43,6 +44,7 @@ export function Button({
             onPress={onPress}
             activeOpacity={activeOpacity}
             width={width}
+            height={height}
         >
             <TitleStyle color={color}>
                 {title}

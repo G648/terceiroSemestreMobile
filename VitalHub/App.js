@@ -13,6 +13,8 @@ import { BottomTabNavigation } from './src/settings/Routes/AppTabNavigationDocto
 import MedicalRecord from './src/screens/Doctor/MedicalRecord';
 import { MockData } from './src/utils/MockData';
 import PatientHome from './src/screens/Patient/PatientHome';
+import { BottomTabNavigationPatient } from './src/settings/Routes/AppTabNavigationPatient';
+import ChooseClinic from './src/screens/Patient/ChooseClinic';
 
 
 export default function App() {
@@ -44,11 +46,17 @@ export default function App() {
       {/* Componente para navegação */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
 
-      <Stack.Screen
-        name='HomePatient'
-        component={PatientHome}
-        options={{title: 'HomePatient'}}
-      />
+        <Stack.Screen
+          name='HomePatient'
+          component={BottomTabNavigationPatient}
+          options={{ title: 'HomePatient' }}
+        />
+
+        <Stack.Screen
+          name='ChooseClinic'
+          component={ChooseClinic}
+          options={{ title: 'ChooseClinic' }}
+        />
 
         <Stack.Screen
           name='Home'
@@ -59,7 +67,7 @@ export default function App() {
         <Stack.Screen
           name='MedicalRecord'
           component={MedicalRecord}
-          options={{title: 'MedicalRecord'}}
+          options={{ title: 'MedicalRecord' }}
         />
 
         <Stack.Screen
