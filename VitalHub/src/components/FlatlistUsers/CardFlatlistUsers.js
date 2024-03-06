@@ -25,24 +25,24 @@ export const CardsUser = styled.View`
 `
 
 export const ProfileImage = styled.Image`
-    width: 88px ;
-    height: 99px ;
+    width: ${({ width = '88px' }) => width} ;
+    height: ${({ height = '99px' }) => height} ;
     border-radius: 5px ;
     margin-right: 15px;
-
 `
 
 export const ProfileName = styled.Text`   
     color: #33303e;
     font-family: "MontserratAlternates_600SemiBold";
     font-size: 20px ;
-    margin-bottom: ${({marginBottomName = "0px"}) => marginBottomName};
+    margin-bottom: ${({ marginBottomName = "0px" }) => marginBottomName};
 `
 
 export const ProfileData = styled.View`
     flex-direction: row ;
     gap: 15px ;
     margin-bottom: -10px;
+    margin-left: ${({ marginLeftInfoUser = '0px' }) => marginLeftInfoUser};
 `
 export const TextAge = styled.Text`
     font-size: 16px ;
@@ -90,20 +90,22 @@ export const ButtonCard = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
     font-family: 'MontserratAlternates_500Medium';
-    color: ${(props) => 
+    color: ${(props) =>
         props.situation === CardSituation.scheduled ? APP_COLORS.red : APP_COLORS.secondaryV1
     };
     margin-right: 10px;
 `
 
-// export const CardTitle = styled.Text`
-//     color: ${({ colorTitle }) => colorTitle};
-// `
-
 export const ContainerFlex = styled.View`
     flex: 1;
     flex-direction: column;
     gap: 8px;
+`
+
+export const ClinicAvaliation = styled.Text`
+    color: #F9A620;
+    font-size: 16px;
+    margin-left: -15px;
 `
 
 export function CardUser({
@@ -118,12 +120,19 @@ export function CardUser({
     bgColor,
     situation,
     onPress,
-    marginBottomName
+    marginBottomName,
+    widthImage,
+    heightImage,
+    marginLeftInfoUser,
+    clinicAvaliation,
+    isClinic
 }) {
     return (
         <CardsUser>
 
             <ProfileImage
+                width={widthImage}
+                height={heightImage}
                 source={imageUser}
             />
 
@@ -135,13 +144,17 @@ export function CardUser({
                     {nameUser}
                 </ProfileName>
 
-                <ProfileData>
+                <ProfileData
+                    marginLeftInfoUser={marginLeftInfoUser}
+                >
                     <TextAge>{ageUser}</TextAge>
                     <TextBold>{descriptionUser}</TextBold>
                 </ProfileData>
 
                 <ViewRow>
-                    <ClockCard situation={bgColor}>
+                    <ClockCard
+                        situation={bgColor}
+                    >
                         <ClockIcon
                             name={iconName}
                             size={iconSize}
@@ -151,8 +164,14 @@ export function CardUser({
                         <ClockTime situation={bgColor}>
                             {schedulingTime}
                         </ClockTime>
+
                     </ClockCard>
 
+
+                    {isClinic ? <AntDesign name="star" size={18} color="#F9A620" /> : null}
+                    <ClinicAvaliation>
+                        {clinicAvaliation}
+                    </ClinicAvaliation>
                     <ButtonCard
                         activeOpacity={.6}
                         onPress={onPress}
@@ -164,13 +183,13 @@ export function CardUser({
                                 {"Cancelar"}
                             </ButtonText>
                         ) : situation == CardSituation.carriedOut ? (
-                                <ButtonText>
-                                    {"Ver Prontuário"}
-                                </ButtonText>
-                            ) : (
-                                    <>
-                                    </>
-                            )}
+                            <ButtonText>
+                                {"Ver Prontuário"}
+                            </ButtonText>
+                        ) : (
+                            <>
+                            </>
+                        )}
 
                     </ButtonCard>
                 </ViewRow>

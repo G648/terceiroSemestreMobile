@@ -15,6 +15,7 @@ import { MockData } from './src/utils/MockData';
 import PatientHome from './src/screens/Patient/PatientHome';
 import { BottomTabNavigationPatient } from './src/settings/Routes/AppTabNavigationPatient';
 import ChooseClinic from './src/screens/Patient/ChooseClinic';
+import ChoseDoctor from './src/screens/Patient/ChoseDoctor';
 
 
 export default function App() {
@@ -46,10 +47,17 @@ export default function App() {
       {/* Componente para navegação */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
 
+
         <Stack.Screen
           name='HomePatient'
           component={BottomTabNavigationPatient}
           options={{ title: 'HomePatient' }}
+        />
+        
+        <Stack.Screen
+          name='ChoseDoctor'
+          component={ChoseDoctor}
+          options={{ title: 'ChoseDoctor' }}
         />
 
         <Stack.Screen
