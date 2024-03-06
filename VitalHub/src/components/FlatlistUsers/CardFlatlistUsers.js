@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { AntDesign } from '@expo/vector-icons';
 import { CardSituation } from "../../utils/AppSituationCard";
 import { APP_COLORS } from "../../utils/App_colors";
+import { useState } from "react";
 
 const defaultBgColor = APP_COLORS.grayV6;
 const defaultIconColor = APP_COLORS.grayV1;
@@ -14,12 +15,12 @@ const scheduledTextColor = APP_COLORS.primary
 
 export const CardsUser = styled.View`
     flex: 1;
-    width: 98%;
+    width: 100%;
     border-radius: 8px;
     flex-direction: row;
     align-self:center;
     padding: 2%;
-    margin-bottom:5%;
+    margin-bottom: ${({ marginBottom = '5%' }) => marginBottom};
     background-color: #FFF;
     elevation: 5;
 `
@@ -29,6 +30,7 @@ export const ProfileImage = styled.Image`
     height: ${({ height = '99px' }) => height} ;
     border-radius: 5px ;
     margin-right: 15px;
+    margin-top: ${({ marginTop = '0px' }) => marginTop};
 `
 
 export const ProfileName = styled.Text`   
@@ -108,6 +110,14 @@ export const ClinicAvaliation = styled.Text`
     margin-left: -15px;
 `
 
+export const ButtonSelectedCard = styled.TouchableOpacity`
+    border-width: 3px ;
+    border-color: ${({ isSelected = false }) => isSelected ? APP_COLORS.secondary : "transparent"};
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 5%;
+`
+
 export function CardUser({
     imageUser,
     nameUser,
@@ -125,77 +135,94 @@ export function CardUser({
     heightImage,
     marginLeftInfoUser,
     clinicAvaliation,
-    isClinic
+    isClinic,
+    marginTopImage,
+    onPressBorder,
+    isSelected,
+    marginBottomCard,
+    isDoctor
 }) {
+
     return (
-        <CardsUser>
 
-            <ProfileImage
-                width={widthImage}
-                height={heightImage}
-                source={imageUser}
-            />
+        <ButtonSelectedCard
+            activeOpacity={2}
+            onPress={onPressBorder}
+            isSelected={isSelected}
+        >
+            <CardsUser
+                marginBottom={marginBottomCard}
+            >
+                <ProfileImage
+                    width={widthImage}
+                    height={heightImage}
+                    source={imageUser}
+                    marginTop={marginTopImage}
+                />
 
-            <ContainerFlex>
+                <ContainerFlex>
 
-                <ProfileName
-                    marginBottomName={marginBottomName}
-                >
-                    {nameUser}
-                </ProfileName>
-
-                <ProfileData
-                    marginLeftInfoUser={marginLeftInfoUser}
-                >
-                    <TextAge>{ageUser}</TextAge>
-                    <TextBold>{descriptionUser}</TextBold>
-                </ProfileData>
-
-                <ViewRow>
-                    <ClockCard
-                        situation={bgColor}
+                    <ProfileName
+                        marginBottomName={marginBottomName}
                     >
-                        <ClockIcon
-                            name={iconName}
-                            size={iconSize}
-                            color={iconColor}
-                            situation={bgColor}
-                        />
-                        <ClockTime situation={bgColor}>
-                            {schedulingTime}
-                        </ClockTime>
+                        {nameUser}
+                    </ProfileName>
 
-                    </ClockCard>
-
-
-                    {isClinic ? <AntDesign name="star" size={18} color="#F9A620" /> : null}
-                    <ClinicAvaliation>
-                        {clinicAvaliation}
-                    </ClinicAvaliation>
-                    <ButtonCard
-                        activeOpacity={.6}
-                        onPress={onPress}
+                    <ProfileData
+                        marginLeftInfoUser={marginLeftInfoUser}
                     >
-                        {situation == CardSituation.scheduled ? (
-                            <ButtonText
-                                situation={situation}
+                        <TextAge>{ageUser}</TextAge>
+                        <TextBold>{descriptionUser}</TextBold>
+                    </ProfileData>
+
+                    <ViewRow>
+                        {!isDoctor &&
+                            <ClockCard
+                                situation={bgColor}
                             >
-                                {"Cancelar"}
-                            </ButtonText>
-                        ) : situation == CardSituation.carriedOut ? (
-                            <ButtonText>
-                                {"Ver Prontuário"}
-                            </ButtonText>
-                        ) : (
-                            <>
-                            </>
-                        )}
+                                <ClockIcon
+                                    name={iconName}
+                                    size={iconSize}
+                                    color={iconColor}
+                                    situation={bgColor}
+                                />
+                                <ClockTime situation={bgColor}>
+                                    {schedulingTime}
+                                </ClockTime>
 
-                    </ButtonCard>
-                </ViewRow>
-            </ContainerFlex>
+                            </ClockCard>
+                        }
 
-            <ButtonCard />
-        </CardsUser>
+
+                        {isClinic ? <AntDesign name="star" size={18} color="#F9A620" /> : null}
+                        <ClinicAvaliation>
+                            {clinicAvaliation}
+                        </ClinicAvaliation>
+                        <ButtonCard
+                            activeOpacity={.6}
+                            onPress={onPress}
+                        >
+                            {situation == CardSituation.scheduled ? (
+                                <ButtonText
+                                    situation={situation}
+                                >
+                                    {"Cancelar"}
+                                </ButtonText>
+                            ) : situation == CardSituation.carriedOut ? (
+                                <ButtonText>
+                                    {"Ver Prontuário"}
+                                </ButtonText>
+                            ) : (
+                                <>
+                                </>
+                            )}
+
+                        </ButtonCard>
+                    </ViewRow>
+                </ContainerFlex>
+
+                <ButtonCard />
+            </CardsUser>
+        </ButtonSelectedCard>
     )
 }

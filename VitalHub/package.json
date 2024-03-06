@@ -25,6 +25,7 @@
     "react-native": "0.73.2",
     "react-native-axios": "^0.17.1",
     "react-native-calendar-strip": "^2.2.6",
+    "react-native-calendars": "^1.1304.1",
     "react-native-date-picker": "^4.3.7",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-ionicons": "^4.6.5",

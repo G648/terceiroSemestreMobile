@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import { Container } from '../../components/Container/Style'
 import { Title } from '../../components/Title/Style'
 import { FlatlistInfos } from '../../components/FlatlistUsers/FlatlistUsers'
 import { ClinicData } from '../../utils/MockDataClinics'
 import { CardUser } from '../../components/FlatlistUsers/CardFlatlistUsers'
-import { Image } from 'react-native'
 import { APP_COLORS } from '../../utils/App_colors'
 import { Button } from '../../components/Button/Button'
 import { UnderlinedLink } from '../../components/Links/Style'
@@ -16,6 +15,14 @@ export const ContainerScrollView = styled.ScrollView`
 `
 
 export default function ChooseClinic({ navigation }) {
+
+    const [selectedCard, setSelectedCard] = useState(null);
+
+    const handleCardPress = (id) => {
+        setSelectedCard(id);
+    };
+
+
     return (
         <Container>
             <Title
@@ -30,9 +37,8 @@ export default function ChooseClinic({ navigation }) {
                     data={ClinicData}
                     renderItem={({ item }) => {
                         return (
-
                             <CardUser
-                                imageUser={require('../../assets/Icons/Group.svg')}
+                                imageUser={require('../../assets/Images/Group.png')}
                                 nameUser={item.nome}
                                 descriptionUser={item.localidade}
                                 schedulingTime={item.horarioFuncionamento}
@@ -42,8 +48,13 @@ export default function ChooseClinic({ navigation }) {
                                 clinicAvaliation={item.classificacao}
                                 marginLeftInfoUser={"-15px"}
                                 isClinic={true}
+                                widthImage={60}
+                                heightImage={53}
+                                marginTopImage={15}
+                                isSelected={selectedCard === item.id}
+                                onPressBorder={() => handleCardPress(item.id)}
+                                marginBottomCard={0}
                             />
-
                         )
                     }}
                     style={{ flex: 1 }}

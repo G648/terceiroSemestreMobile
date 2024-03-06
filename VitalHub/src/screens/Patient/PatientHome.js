@@ -115,7 +115,7 @@ const PatientHome = ({ navigation }) => {
                 data={filteredData}
                 renderItem={({ item }) => (
                     <CardUser
-                        imageUser={{ uri: item.imagem }}
+                        imageUser={ item.imagem }
                         nameUser={item.nome}
                         ageUser={`${item.idade} anos`}
                         descriptionUser={item.especialidade}

@@ -16,6 +16,7 @@ import PatientHome from './src/screens/Patient/PatientHome';
 import { BottomTabNavigationPatient } from './src/settings/Routes/AppTabNavigationPatient';
 import ChooseClinic from './src/screens/Patient/ChooseClinic';
 import ChoseDoctor from './src/screens/Patient/ChoseDoctor';
+import ChooseDate from './src/screens/Patient/ChooseDate';
 
 
 export default function App() {
@@ -52,6 +53,12 @@ export default function App() {
           name='HomePatient'
           component={BottomTabNavigationPatient}
           options={{ title: 'HomePatient' }}
+        />
+
+        <Stack.Screen
+        name='ChooseDate'
+        component={ChooseDate}
+        options={{title: 'ChooseDate'}}
         />
         
         <Stack.Screen
