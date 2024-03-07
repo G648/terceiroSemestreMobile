@@ -59,9 +59,9 @@ export default function ChoseDoctor({ navigation }) {
         color={APP_COLORS.white}
         width={"90%"}
         title={'Continuar'}
-        onPress={() => navigation.navigate("ChooseDate")} 
+        onPress={() => navigation.navigate("ChooseDate")}
       />
-
+      
       <UnderlinedLink
         ColorText={APP_COLORS.secondary}
         buttonAlign={'center'}

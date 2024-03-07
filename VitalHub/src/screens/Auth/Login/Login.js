@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, ContainerView } from '../../../components/Container/Style';
 import { Logo } from '../../../components/Logo/Style';
 import { Title } from '../../../components/Title/Style';
@@ -10,6 +10,16 @@ import { ComeBack } from '../../../components/GoBackPage/GoBackPage';
 import { APP_COLORS } from '../../../utils/App_colors';
 
 const Login = ({ navigation }) => {
+
+  const [selectUser, setSelectUser] = useState("")
+
+  function handleSelectUser() {
+    if (selectUser === "Paciente") {
+      navigation.navigate("DoctorHome"); // Adicione a página correspondente para outro tipo de usuário
+    } else {
+      navigation.navigate("HomePatient");
+    }
+  }
 
   return (
 
@@ -39,36 +49,37 @@ const Login = ({ navigation }) => {
       />
 
       <Button
-        backgroudButton={'blue'}
-        color={'white'}
-        fieldButton={"blue"}
-        titleButton={"Entrar".toUpperCase()}
-        marginTopButton={15}
+        color={APP_COLORS.white}
+        border={APP_COLORS.secondary}
+        activeOpacity={1}
+        title={"Entrar".toUpperCase()}
+        marginTop={15}
         buttonOppacity={0.8}
+        backgroundColor={APP_COLORS.secondary}
+        onPress={() => handleSelectUser()}
       />
 
       <ButtonFlex>
         <Button
-          backgroudButton={'white'}
-          color={'blue'}
-          fieldButton={"blue"}
-          titleButton={"Entrar com Google".toUpperCase()}
-          marginTopButton={15}
-          buttonOppacity={0.6}
+          border={APP_COLORS.secondary}
+          marginTop={15}
+          color={APP_COLORS.secondary}
+          title={"Entrar com Google".toUpperCase()}
+          buttonOppacity={.8}
         />
       </ButtonFlex>
 
-      <View style={{ flexDirection: "row", justifyContent: "center", alignSelf: "center", width: "90%", gap: -60 }}>
+      <View style={{ flexDirection: "row", justifyContent: "center", alignSelf: "center", justifyContent: 'space-between', width: "90%", gap: -60 }}>
         <LinkMedium>
           Não tem conta ?
         </LinkMedium>
-        <Button
-          titleButton={"Criar uma conta agora!"}
-          fieldButton={"transparent"}
-          marginTopButton={15}
-          color={'#4D659D'}
+
+        <UnderlinedLink
+          textIntput={'Criar uma conta agora!'}
+          ColorText={APP_COLORS.secondary}
+          buttonOpacity={.8}
           onClick={() => navigation.navigate("CadastroUser")}
-          buttonOppacity={0.8}
+          buttonAlign={'end'}
         />
       </View>
     </Container>

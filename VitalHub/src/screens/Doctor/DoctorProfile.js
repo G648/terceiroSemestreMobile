@@ -3,7 +3,7 @@ import { Container, DataUser } from '../../components/Header/Header'
 import { ProfileImageModal } from '../../components/Dialogs/SeeMedicalDialog'
 import styled from 'styled-components/native'
 import { APP_COLORS } from '../../utils/App_colors'
-import { ContainerViewUserInfo, InputStyle, ScrollViewContainer, TextLabel } from './MedicalRecord'
+import { InputStyle, ScrollViewContainer, TextLabel } from './MedicalRecord'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Entypo } from '@expo/vector-icons';
 import { Pressable, Platform } from 'react-native'

@@ -48,6 +48,28 @@ export default function App() {
       {/* Componente para navegação */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
 
+        <Stack.Screen
+          //nome da tela
+          name='Login'
+          //Componente que será chamado
+          component={Login}
+          //Titulo da tela
+          options={{ title: 'Login' }}
+
+        />
+
+        <Stack.Screen
+          name='CadastroUser'
+          component={CadastroUser}
+          options={{ title: 'CadastroUser' }}
+        />
+
+        <Stack.Screen
+          name='DoctorHome'
+          component={BottomTabNavigation}
+          options={{title: 'DoctorHome'}}
+
+        />
 
         <Stack.Screen
           name='HomePatient'
@@ -56,11 +78,11 @@ export default function App() {
         />
 
         <Stack.Screen
-        name='ChooseDate'
-        component={ChooseDate}
-        options={{title: 'ChooseDate'}}
+          name='ChooseDate'
+          component={ChooseDate}
+          options={{ title: 'ChooseDate' }}
         />
-        
+
         <Stack.Screen
           name='ChoseDoctor'
           component={ChoseDoctor}
@@ -94,15 +116,6 @@ export default function App() {
           options={{ title: 'Navegacao' }}
         />
 
-        <Stack.Screen
-          //nome da tela
-          name='Login'
-          //Componente que será chamado
-          component={Login}
-          //Titulo da tela
-          options={{ title: 'Login' }}
-
-        />
 
         <Stack.Screen
           name='Cadastro'
@@ -116,11 +129,7 @@ export default function App() {
           options={{ title: 'VerificaEmail' }}
         />
 
-        <Stack.Screen
-          name='CadastroUser'
-          component={CadastroUser}
-          options={{ title: 'CadastroUser' }}
-        />
+
 
       </Stack.Navigator>
     </NavigationContainer>

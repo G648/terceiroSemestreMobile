@@ -29,6 +29,7 @@ export const TextLabel = styled.Text`
     text-align: start;
     width: 100%;
     margin-bottom: ${({marginBottom}) => marginBottom};
+    margin-left: ${({marginLeftLabel = 0}) => marginLeftLabel};
 `
 
 export const InputStyle = styled.TextInput`

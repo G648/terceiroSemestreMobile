@@ -7,7 +7,6 @@ color: #8c8a97;
 margin-top: 26px;
 align-self: center ;
 margin-left: 20px;
-text-decoration: underline;
 margin-bottom: 15px;
 color: ${props => props.ColorText};
 text-align:center;

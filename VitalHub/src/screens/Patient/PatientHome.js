@@ -125,6 +125,8 @@ const PatientHome = ({ navigation }) => {
                         key={item.id}
                         situation={item.situation}
                         onPress={() => handleCardPress(selectedButton, item)}
+                        // onPressBorder={}
+                        // isSelected={}
                     />
                 )}
                 style={{ flex: 1 }}

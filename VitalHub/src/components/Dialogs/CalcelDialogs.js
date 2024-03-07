@@ -31,10 +31,17 @@ export const ContainerTextBox = styled.View`
 export const TextModal = styled(Title)`
     text-align: center;
     font-size: ${({ fontSizeText = "18px" }) => fontSizeText};
-    padding-bottom: 15px;
+    padding-bottom: ${({marginBottom = '15px'}) => marginBottom};
 `
 
 export const TextParagrafModal = styled(TextModal)`
+    margin-top: 18;
+    margin-bottom: -5;
+`
+
+export const ContainerScheduleInfos = styled.View`
+    align-items: flex-start;
+    width: 310;
 `
 
 export default function CancelDialogs({
@@ -50,7 +57,8 @@ export default function CancelDialogs({
     showCancelButton,
     cancelButtonTitle,
     alignItemsContainer,
-    paddingTitle
+    paddingTitle,
+    isModalScheduling
 }) {
     return (
         <ModalContainer
@@ -77,6 +85,37 @@ export default function CancelDialogs({
                         {customContent}
                     </TextParagrafModal>
 
+                    {isModalScheduling &&
+                        <ContainerScheduleInfos>
+                            <TextParagrafModal>
+                                Data da consulta
+                            </TextParagrafModal>
+                            <TextModal fontSizeText={14}>
+                                1 de Novembro de 2023
+                            </TextModal>
+                            <TextParagrafModal>
+                                Médico(a) da consulda
+                            </TextParagrafModal>
+                            <TextModal fontSizeText={14}>
+                                Dra Alessandra
+                            </TextModal>
+                            <TextModal fontSizeText={14} marginBottom={'-10px'}>
+                                Demartologa, Esteticista
+                            </TextModal>
+                            <TextParagrafModal>
+                                Local da consulta
+                            </TextParagrafModal>
+                            <TextModal fontSizeText={14}>
+                                São Paulo, SP
+                            </TextModal>
+                            <TextParagrafModal>
+                                Tipo da consulta
+                            </TextParagrafModal>
+                            <TextModal fontSizeText={14}>
+                                Rotina
+                            </TextModal>
+                        </ContainerScheduleInfos>
+                    }
 
                     <Button
                         activeOpacity={.8}

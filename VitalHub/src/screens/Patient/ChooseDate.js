@@ -1,19 +1,20 @@
-import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 import React, { useEffect, useState } from 'react'
 import { Container } from '../../components/Container/Style';
 import { Title } from '../../components/Title/Style';
 import { APP_COLORS } from '../../utils/App_colors';
 import { FontAwesome } from '@expo/vector-icons';
-import ScheduleAppointment, { SelectedList, ViewSelectedList } from '../../components/Dialogs/ScheduleAppointment';
-import { ScheduledButton } from './PatientHome';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { SelectedList, ViewSelectedList } from '../../components/Dialogs/ScheduleAppointment';
+import { TextLabel } from '../Doctor/MedicalRecord';
+import { UnderlinedLink } from '../../components/Links/Style';
+import { Button } from '../../components/Button/Button';
+import CancelDialogs from '../../components/Dialogs/CalcelDialogs';
 
 export default function ChooseDate({ navigation }) {
 
     const [selected, setSelected] = useState('');
     const [currentDate, setCurrentDate] = useState('');
-    const [isModalScheduleVisible, setIsModalScheduleVisible] = useState(true);
-    const [isModalCancel, setIsModalCancel] = useState(false);
+    const [isModalScheduleVisible, setIsModalScheduleVisible] = useState(false);
     const [selectedInput, setSelectedInput] = useState("")
 
     useEffect(() => {
@@ -25,24 +26,34 @@ export default function ChooseDate({ navigation }) {
         setCurrentDate(
             date + '/' + month + '/' + year
         )
-
-        // LocaleConfig.locales['pt-BR'] = {
-        //     //meses
-        //     monthNames:
-        //         "Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro".split(
-        //             "_"
-        //         ),
-        //     //abreviação de meses
-        //     monthNamesShort: "jan_fev_mar_abr_mai_jun_jul_ago_set_out_nov_dez".split("_"),
-        // };
-
-        // LocaleConfig.defaultLocale = 'pt-BR';
-
     }, []);
 
+    function handleScheduling() {
+        setIsModalScheduleVisible(true)
+    }
+
+
+    async function handleGoBackPage() {
+        await setIsModalScheduleVisible(false)
+        navigation.navigate('HomePatient')
+    }
+
     const data = [
-        { key: '1', value: 'CheckUp' },
-        { key: '2', value: 'routine' }
+        { key: '1', value: '08:00' },
+        { key: '2', value: '09:00' },
+        { key: '3', value: '10:00' },
+        { key: '4', value: '11:00' },
+        { key: '5', value: '12:00' },
+        { key: '6', value: '13:00' },
+        { key: '7', value: '14:00' },
+        { key: '8', value: '15:00' },
+        { key: '9', value: '16:00' },
+        { key: '10', value: '17:00' },
+        { key: '11', value: '18:00' },
+        { key: '12', value: '19:00' },
+        { key: '13', value: '20:00' },
+        { key: '14', value: '21:00' },
+        { key: '15', value: '22:00' }
     ]
 
     return (
@@ -66,41 +77,22 @@ export default function ChooseDate({ navigation }) {
 
                 style={{
                     backgroundColor: APP_COLORS.white,
-                    width: 300,
+                    width: 380,
                 }}
             />
 
-            {/* Renderiza o Dialogs quando isModalVisible for true */}
-            {isModalCancel && (
-                <CancelDialogs
-                    isVisible={isModalCancel}
-                    bgColor={APP_COLORS.grayV6}
-                    titleContent={"Cancelar consulta"}
-                    customContent={"Ao cancelar essa consulta, abrirá uma possível disponibilidade no seu horário, deseja mesmo cancelar essa consulta?"}
-                    fontSizeText={"22px"}
-                    fontSizeTextParagraf={"15px"}
-                    onPressConfirm={() => { setIsModalCancel(false) }}
-                    onPressCancel={() => { setIsModalCancel(false) }}
-                    showCancelButton={true}
-                />
-            )}
-
-            {/* <ScheduledButton
-                activeOpacity={.8}
-                onPress={() => setIsModalScheduleVisible(true)}
+            <ViewSelectedList
+                marginTopList={60}
             >
-                <FontAwesome5
-                    name="stethoscope"
-                    size={32}
-                    color={APP_COLORS.white}
-                />
-            </ScheduledButton> */}
 
-            <ViewSelectedList>
-
+                <TextLabel
+                    marginLeftLabel={15}
+                >
+                    Selecione um horário disponível
+                </TextLabel>
                 <SelectedList
                     data={data}
-                    placeholder={'teste'}
+                    placeholder={'Selecionar horário'}
                     setSelected={setSelectedInput}
                     save={"save"}
                     onSelect={selectedInput}
@@ -108,14 +100,17 @@ export default function ChooseDate({ navigation }) {
                         borderColor: APP_COLORS.primary,
                         borderWidth: 2,
                         height: 60,
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        marginHorizontal: 10,
+                        marginTop: 20
                     }}
 
                     dropdownStyles={{
                         backgroundColor: "white",
                         position: "absolute",
-                        top: 40,
-                        width: "100%",
+                        top: 60,
+                        right: 9.8,
+                        width: "94.9%",
                         height: '80px',
                         zIndex: 1,
                         borderColor: APP_COLORS.primary,
@@ -137,6 +132,43 @@ export default function ChooseDate({ navigation }) {
                 />
 
             </ViewSelectedList>
+
+            <Button
+                title={'Continuar'}
+                activeOpacity={.8}
+                border={APP_COLORS.secondary}
+                backgroundColor={APP_COLORS.secondary}
+                color={APP_COLORS.white}
+                marginTop={100}
+                width={'95%'}
+                onPress={() => handleScheduling()}
+            />
+
+            {/* Renderiza o Dialogs quando isModalVisible for true */}
+            {isModalScheduleVisible && (
+                <CancelDialogs
+                    isVisible={isModalScheduleVisible}
+                    bgColor={APP_COLORS.grayV6}
+                    titleContent={"Agendar consulta"}
+                    customContent={"Consulte os dados selecionados para a sua consulta"}
+                    fontSizeText={"22px"}
+                    fontSizeTextParagraf={"15px"}
+                    onPressConfirm={() => {
+                        handleGoBackPage()
+                    }}
+                    onPressCancel={() => { setIsModalScheduleVisible(false) }}
+                    showCancelButton={true}
+                    isModalScheduling={true}
+                />
+            )}
+
+            <UnderlinedLink
+                ColorText={APP_COLORS.secondary}
+                buttonAlign={'center'}
+                buttonOpacity={.6}
+                textIntput={'Cancelar'}
+                onClick={() => navigation.navigate("HomePatient")}
+            />
         </Container>
     )
 }

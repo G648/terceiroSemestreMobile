@@ -12,6 +12,7 @@ import { FontAwesome } from '@expo/vector-icons';
 export const ViewSelectedList = styled.View`
     width: 100%;
     margin-bottom: 25px;
+    margin-top: ${({marginTopList = 0}) => marginTopList};
 `
 
 export const SelectedList = styled(SelectList)`

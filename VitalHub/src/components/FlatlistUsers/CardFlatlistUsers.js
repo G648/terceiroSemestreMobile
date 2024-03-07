@@ -3,6 +3,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { CardSituation } from "../../utils/AppSituationCard";
 import { APP_COLORS } from "../../utils/App_colors";
 import { useState } from "react";
+import { SeeMedicalDialog } from "../Dialogs/SeeMedicalDialog";
 
 const defaultBgColor = APP_COLORS.grayV6;
 const defaultIconColor = APP_COLORS.grayV1;
@@ -150,6 +151,7 @@ export function CardUser({
             onPress={onPressBorder}
             isSelected={isSelected}
         >
+
             <CardsUser
                 marginBottom={marginBottomCard}
             >
@@ -216,7 +218,6 @@ export function CardUser({
                                 <>
                                 </>
                             )}
-
                         </ButtonCard>
                     </ViewRow>
                 </ContainerFlex>
