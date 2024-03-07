@@ -14,6 +14,7 @@ import CancelDialogs from '../../components/Dialogs/CalcelDialogs';
 import { FontAwesome5 } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import ScheduleAppointment from '../../components/Dialogs/ScheduleAppointment';
+import { SeeMedicalDialog } from '../../components/Dialogs/SeeMedicalDialog';
 
 
 export const ScheduledButton = styled.TouchableOpacity`
@@ -49,6 +50,11 @@ const PatientHome = ({ navigation }) => {
         selectedSituation == "Agendadas" ? setIsModalCancel(true) : setisModalMedical(true)
         setSelectedUserData(userData)
     };
+
+    const handleCardPressInfoDoctor = (selectedSituation, userData) => {
+        selectedSituation == "Agendadas" ? setisModalMedical(true) : setisModalMedical(true)
+        setSelectedUserData(userData)
+    }
 
     useEffect(() => {
         let newData = [];
@@ -115,7 +121,7 @@ const PatientHome = ({ navigation }) => {
                 data={filteredData}
                 renderItem={({ item }) => (
                     <CardUser
-                        imageUser={ item.imagem }
+                        imageUser={item.imagem}
                         nameUser={item.nome}
                         ageUser={`${item.idade} anos`}
                         descriptionUser={item.especialidade}
@@ -125,8 +131,7 @@ const PatientHome = ({ navigation }) => {
                         key={item.id}
                         situation={item.situation}
                         onPress={() => handleCardPress(selectedButton, item)}
-                        // onPressBorder={}
-                        // isSelected={}
+                        onPressBorder={() => handleCardPressInfoDoctor(selectedButton, item)}
                     />
                 )}
                 style={{ flex: 1 }}
@@ -148,6 +153,27 @@ const PatientHome = ({ navigation }) => {
                 />
             )}
 
+            <SeeMedicalDialog
+                isVisible={isModalMedical}
+                imageUser={ selectedUserData.imagem }
+                nameUser={selectedUserData.nome}
+                ageUser={selectedUserData.crm}
+                emailuser={selectedUserData.especialidade}
+                heightImageUser={250}
+                widthImageUser={320}
+                showCancelButton={true}
+                onPressCancel={() => setisModalMedical(false)}
+                titleButton={"Ver local da consulta".toUpperCase()}
+                onPress={() => {
+                    // navigation.navigate('MedicalRecord');
+                    setisModalMedical(false);
+                    //enviar os dados para a página de medicalRecords
+                    // navigation.navigate("MedicalRecord", {userData: selectedUserData})
+                }}
+                widtContainerInfoUser={180}
+                marginBottomName={"15px"}
+            />
+
             <ScheduledButton
                 activeOpacity={.8}
                 onPress={() => setIsModalScheduleVisible(true)}
@@ -158,6 +184,7 @@ const PatientHome = ({ navigation }) => {
                     color={APP_COLORS.white}
                 />
             </ScheduledButton>
+
             {isModalScheduleVisible &&
                 <ScheduleAppointment
                     widthModal={"100%"}
@@ -174,7 +201,7 @@ const PatientHome = ({ navigation }) => {
                     onClick={() => {
                         navigation.navigate('ChooseClinic')
                         setIsModalScheduleVisible(false)
-                        
+
                     }}
                 />
             }
