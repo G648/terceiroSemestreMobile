@@ -37,7 +37,8 @@ export function SeeMedicalDialog({
     onPressCancel,
     showCancelButton,
     widtContainerInfoUser,
-    marginBottomName
+    marginBottomName,
+    titleButton
 }) {
     return (
         <ModalContainer
@@ -79,7 +80,7 @@ export function SeeMedicalDialog({
                         color={APP_COLORS.white}
                         onPress={onPress}
                         width={320}
-                        title={"Inserir Prontuário"}
+                        title={titleButton}
                     />
 
                     {showCancelButton && (

@@ -131,6 +131,7 @@ const DoctorHome = ({ navigation }) => {
                 nameUser={selectedUserData.nome}
                 ageUser={`${selectedUserData.idade} anos`}
                 emailuser={selectedUserData.email}
+                titleButton={"Inserir prontuário"}
                 onPress={() => {
                     navigation.navigate('MedicalRecord');
                     setisModalMedical(false);
