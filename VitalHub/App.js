@@ -17,6 +17,7 @@ import { BottomTabNavigationPatient } from './src/settings/Routes/AppTabNavigati
 import ChooseClinic from './src/screens/Patient/ChooseClinic';
 import ChoseDoctor from './src/screens/Patient/ChoseDoctor';
 import ChooseDate from './src/screens/Patient/ChooseDate';
+import MapViewLocation from './src/screens/Patient/MapViewLocation';
 
 
 export default function App() {
@@ -56,6 +57,12 @@ export default function App() {
           //Titulo da tela
           options={{ title: 'Login' }}
 
+        />
+
+        <Stack.Screen
+          name='MapViewLocation'
+          component={MapViewLocation}
+          options={{title: 'MapViewLocation'}}
         />
 
         <Stack.Screen

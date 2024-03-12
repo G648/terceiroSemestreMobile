@@ -1,12 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View, Appearance } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
+import {
+  requestForegroundPermissionsAsync, //solicita o acesso à localização
+  getCurrentPositionAsync, //recebe a localização atual
+  watchPositionAsync, //monitorar o posicionamento
+  LocationAccuracy
+}
+  from 'expo-location';
 import MapViewDirections from 'react-native-maps-directions';
 import { mapskey } from './utils/mapsApiKey';
+import { Foundation } from '@expo/vector-icons';
 
 export default function App() {
+  const mapReference = useRef(null)
   const [initialPosition, setInitialPosition] = useState(null);
+  const [finalPosition, setFinalPosition] = useState({
+    latitude: -23.9510,
+    longitude: -46.3390
+  })
   const [theme, setTheme] = useState(false);
 
   async function getLocation() {
@@ -20,7 +32,40 @@ export default function App() {
 
   useEffect(() => {
     getLocation();
-  }, []);
+
+    watchPositionAsync({
+      accuracy: LocationAccuracy.High,
+      timeInterval: 1000,
+      distanceInterval: 1,
+
+    }, async (response) => {
+      await setInitialPosition(response)
+      // mapReference.current?.animateCamera({
+      //   pitch: 60,
+      //   center: response.coords
+      // })
+      console.log(response);
+    })
+  }, [1000]);
+
+  useEffect(() => {
+    realoadMapView();
+  }, [initialPosition]);
+
+  async function realoadMapView() {
+    if (mapReference.current && initialPosition) {
+      await mapReference.current.fitToCoordinates(
+        [
+          { latitude: initialPosition.coords.latitude, longitude: initialPosition.coords.longitude },
+          { latitude: finalPosition.latitude, longitude: finalPosition.longitude }
+        ],
+        {
+          edgePadding: { top: 60, right: 60, bottom: 60, left: 60 },
+          animated: true
+        }
+      )
+    }
+  }
 
   function toggleTheme() {
     setTheme(!theme);
@@ -30,6 +75,8 @@ export default function App() {
     <View style={styles.container}>
       {initialPosition != null ? (
         <MapView
+          ref={mapReference}
+
           initialRegion={{
             latitude: initialPosition.coords.latitude,
             longitude: initialPosition.coords.longitude,
@@ -76,12 +123,22 @@ export default function App() {
         </View>
       )}
 
+
+
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={.8}
         onPress={toggleTheme}
         style={[styles.button, theme && styles.buttonDark]}
       >
         <Text style={styles.buttonText}>{theme ? 'Tema Claro' : 'Tema Escuro'}</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        activeOpacity={.8}
+        onPress={() => realoadMapView()}
+        style={[styles.zoomOut, theme && styles.buttonDark]}
+      >
+        <Foundation name="zoom-out" size={28} color={theme ? "white" : "black"} />
       </TouchableOpacity>
     </View>
   );
@@ -105,9 +162,9 @@ const styles = StyleSheet.create({
     height: 50,
     position: 'absolute',
     bottom: 25,
-    right: 25,
-    justifyContent:  'center',
-    alignItems:'center',
+    right: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
     activeOpacity: 1,
     borderRadius: 8,
     backgroundColor: 'black'
@@ -120,6 +177,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: '10px',
   },
+  zoomOut: {
+    position: 'absolute',
+    bottom: '2.3%',
+    right: '10%',
+    backgroundColor: 'white',
+    padding: 16,
+    borderRadius: 8
+  }
 });
 
 

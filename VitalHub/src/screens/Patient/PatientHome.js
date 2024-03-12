@@ -165,7 +165,7 @@ const PatientHome = ({ navigation }) => {
                 onPressCancel={() => setisModalMedical(false)}
                 titleButton={"Ver local da consulta".toUpperCase()}
                 onPress={() => {
-                    // navigation.navigate('MedicalRecord');
+                    navigation.navigate('MapViewLocation');
                     setisModalMedical(false);
                     //enviar os dados para a página de medicalRecords
                     // navigation.navigate("MedicalRecord", {userData: selectedUserData})
