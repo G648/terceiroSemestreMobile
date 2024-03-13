@@ -41,20 +41,23 @@ const PatientHome = ({ navigation }) => {
     const [selectedButton, setSelectedButton] = useState(CardSituation.scheduled);
     const [filteredData, setFilteredData] = useState(DoctorData);
     const [isModalCancel, setIsModalCancel] = useState(false);
-    const [isModalMedical, setisModalMedical] = useState(false)
+    const [isModalMedical, setisModalMedical] = useState(false);
     const [isModalScheduleVisible, setIsModalScheduleVisible] = useState(false);
-    const [selectedUserData, setSelectedUserData] = useState({})
-    const [selectedInput, setSelectedInput] = useState("")
+    const [isModalMedicalRecord, setIsModalMedicalRecord] = useState(false);
+    const [selectedUserData, setSelectedUserData] = useState({});
+    const [selectedInput, setSelectedInput] = useState("");
 
     const handleCardPress = (selectedSituation, userData) => {
-        selectedSituation == "Agendadas" ? setIsModalCancel(true) : setisModalMedical(true)
+        selectedSituation == "Agendadas" ? setIsModalCancel(true) : navigation.navigate('MedicalRecordPage', {userData: userData})
         setSelectedUserData(userData)
     };
 
     const handleCardPressInfoDoctor = (selectedSituation, userData) => {
-        selectedSituation == "Agendadas" ? setisModalMedical(true) : setisModalMedical(true)
+        selectedSituation == "Realizadas" ? setisModalMedical(true) : setisModalMedical(true)
         setSelectedUserData(userData)
     }
+
+
 
     useEffect(() => {
         let newData = [];
@@ -131,7 +134,7 @@ const PatientHome = ({ navigation }) => {
                         key={item.id}
                         situation={item.situation}
                         onPress={() => handleCardPress(selectedButton, item)}
-                        onPressBorder={() => handleCardPressInfoDoctor(selectedButton, item)}
+                        onPressBorder={() => item.situation === "Agendadas" ? handleCardPressInfoDoctor(selectedButton, item) : null}
                     />
                 )}
                 style={{ flex: 1 }}
@@ -155,7 +158,7 @@ const PatientHome = ({ navigation }) => {
 
             <SeeMedicalDialog
                 isVisible={isModalMedical}
-                imageUser={ selectedUserData.imagem }
+                imageUser={selectedUserData.imagem}
                 nameUser={selectedUserData.nome}
                 ageUser={selectedUserData.crm}
                 emailuser={selectedUserData.especialidade}
@@ -173,6 +176,7 @@ const PatientHome = ({ navigation }) => {
                 widtContainerInfoUser={180}
                 marginBottomName={"15px"}
             />
+
 
             <ScheduledButton
                 activeOpacity={.8}

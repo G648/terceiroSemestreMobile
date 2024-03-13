@@ -86,7 +86,14 @@ export const ContainerColumn = styled.View`
     
 `
 
-export default function MapViewLocation() {
+export const CenterInfoMap = styled.View`
+    justify-content:center;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+`
+
+export default function MapViewLocation({navigation}) {
     const mapReference = useRef(null)
     const [initialPosition, setInitialPosition] = useState(null);
     const [finalPosition, setFinalPosition] = useState({
@@ -191,10 +198,10 @@ export default function MapViewLocation() {
                     </MapViewContainer>
                 </ContainerMap>
             ) : (
-                <View >
-                    <Text>Evento não carregado</Text>
+                <CenterInfoMap>
+                    <Text>Carregando</Text>
                     <ActivityIndicator />
-                </View>
+                </CenterInfoMap>
             )}
 
 
@@ -227,6 +234,7 @@ export default function MapViewLocation() {
                         placeholder='Rua Vicenso Silva, 987'
                         boxHeigth={'60px'}
                         boxWidth={'100%'}
+                        placeholderTextColor={APP_COLORS.secondary}
                     />
                     <BoxInfoRow>
                         <ContainerColumn>
@@ -237,6 +245,7 @@ export default function MapViewLocation() {
                                 placeholder='Rua Vicenso Silva, 987'
                                 boxHeigth={'60px'}
                                 boxWidth={'90%'}
+                                placeholderTextColor={APP_COLORS.secondary}
                             />
                         </ContainerColumn>
 
@@ -248,6 +257,7 @@ export default function MapViewLocation() {
                                 placeholder='Rua Vicenso Silva, 987'
                                 boxHeigth={'60px'}
                                 boxWidth={'90%'}
+                                placeholderTextColor={APP_COLORS.secondary}
                             />
                         </ContainerColumn>
                     </BoxInfoRow>
@@ -257,6 +267,8 @@ export default function MapViewLocation() {
                     textIntput={"Voltar"}
                     ColorText={APP_COLORS.secondary}
                     buttonAlign={"center"}
+                    onClick={() => navigation.navigate("HomePatient")}
+                    buttonOpacity={.8}
                 />
             </ContainerInfoClinic>
 

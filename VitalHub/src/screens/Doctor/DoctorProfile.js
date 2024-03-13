@@ -13,8 +13,8 @@ import { UnderlinedLink } from '../../components/Links/Style'
 export const DoctorContainerInfos = styled.View`
   width: 80%;
   height: 12%;
-  position: relative;
-  bottom: 70px;
+  position: absolute;
+  top: 28%;
   background-color: ${APP_COLORS.white};
   border-radius: 8px;
   elevation: 10px;
@@ -51,7 +51,23 @@ export const InfosColumn = styled.View`
   width: 45%;
 `
 
+export const ContainerInfoDoctor = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+`
+export const Crm = styled(DoctorEmail)`
+
+`
+
+export const Especialidade = styled(Crm)`
+
+`
+
 export default function DoctorProfile({
+  especialidade,
+  crm,
+  isDoctor
 }) {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
@@ -109,6 +125,16 @@ export default function DoctorProfile({
           <DoctorName>
             Guilherme Amorim
           </DoctorName>
+
+          <ContainerInfoDoctor>
+            <Crm>
+              {crm}
+            </Crm>
+
+            <Especialidade>
+              {especialidade}
+            </Especialidade>
+          </ContainerInfoDoctor>
 
           <DoctorEmail>
             cezarguilherme03@gmail.com

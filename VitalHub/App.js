@@ -18,6 +18,7 @@ import ChooseClinic from './src/screens/Patient/ChooseClinic';
 import ChoseDoctor from './src/screens/Patient/ChoseDoctor';
 import ChooseDate from './src/screens/Patient/ChooseDate';
 import MapViewLocation from './src/screens/Patient/MapViewLocation';
+import MedicalRecordPage from './src/screens/Patient/MedicalRecordPage';
 
 
 export default function App() {
@@ -60,9 +61,15 @@ export default function App() {
         />
 
         <Stack.Screen
+          name='MedicalRecordPage'
+          component={MedicalRecordPage}
+          options={{ title: 'MedicalRecordPage' }}
+        />
+
+        <Stack.Screen
           name='MapViewLocation'
           component={MapViewLocation}
-          options={{title: 'MapViewLocation'}}
+          options={{ title: 'MapViewLocation' }}
         />
 
         <Stack.Screen
@@ -74,7 +81,7 @@ export default function App() {
         <Stack.Screen
           name='DoctorHome'
           component={BottomTabNavigation}
-          options={{title: 'DoctorHome'}}
+          options={{ title: 'DoctorHome' }}
 
         />
 
