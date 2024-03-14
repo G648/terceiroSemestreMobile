@@ -11,7 +11,7 @@ import { UnderlinedLink } from '../../components/Links/Style'
 import { APP_COLORS } from '../../utils/App_colors'
 
 
-export default function DoctorProfile({
+export default function PatitentProfile({
 }) {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)

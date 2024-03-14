@@ -19,6 +19,7 @@ import ChoseDoctor from './src/screens/Patient/ChoseDoctor';
 import ChooseDate from './src/screens/Patient/ChooseDate';
 import MapViewLocation from './src/screens/Patient/MapViewLocation';
 import MedicalRecordPage from './src/screens/Patient/MedicalRecordPage';
+import MedicalExamsPhotos from './src/screens/Patient/MedicalExamsPhotos';
 
 
 export default function App() {
@@ -58,6 +59,12 @@ export default function App() {
           //Titulo da tela
           options={{ title: 'Login' }}
 
+        />
+
+        <Stack.Screen
+          name='MedicalExamsPhotos'
+          component={MedicalExamsPhotos}
+          options={{ title: 'MedicalExamsPhotos' }}
         />
 
         <Stack.Screen

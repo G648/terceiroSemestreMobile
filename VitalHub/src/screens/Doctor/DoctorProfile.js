@@ -12,13 +12,13 @@ import { UnderlinedLink } from '../../components/Links/Style'
 
 export const DoctorContainerInfos = styled.View`
   width: 80%;
-  height: 12%;
-  position: absolute;
-  top: 28%;
+  padding: 20px;
+  position: relative;
+  top: -13%;
   background-color: ${APP_COLORS.white};
   border-radius: 8px;
   elevation: 10px;
-
+  z-index: 9999;
 `
 
 export const DoctorName = styled.Text`
@@ -26,7 +26,6 @@ export const DoctorName = styled.Text`
   color: black;
   font-family: "MontserratAlternates_600SemiBold";
   text-align:center;
-  margin-top: 10px;
 `
 
 export const DoctorEmail = styled(DoctorName)`

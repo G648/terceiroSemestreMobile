@@ -17,7 +17,9 @@ export const ImageUser = styled.Image`
   border-radius: 5px;
 `;
 
-export const DataUser = styled.View``;
+export const DataUser = styled.View`
+
+`;
 
 export const TextDefault = styled.Text`
   font-size: 14px;
