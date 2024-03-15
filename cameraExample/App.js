@@ -25,11 +25,11 @@ export default function App() {
   async function SavePhoto() {
     if (photo) {
       await MediaLibrary.createAssetAsync(photo)
-      .then(() => {
-        Alert.alert("Sucesso", 'Foto salva na galeria')
-      }).catch(() => {
-        Alert.alert("erro ao processar foto")
-      })
+        .then(() => {
+          Alert.alert("Sucesso", 'Foto salva na galeria')
+        }).catch(() => {
+          Alert.alert("erro ao processar foto")
+        })
     }
   }
 

@@ -4,7 +4,7 @@ export const LinkMedium = styled.Text`
 font-size: 14px;
 font-family: 'MontserratAlternates_500Medium' ;
 color: #8c8a97;
-margin-top: 26px;
+margin-top: ${({ marginTop = '26px' }) => marginTop};
 align-self: center ;
 margin-left: 20px;
 margin-bottom: 15px;
@@ -13,8 +13,8 @@ text-align:center;
 `
 
 export const ButtonLink = styled.TouchableOpacity`
-    align-self: ${props => props.AlignSelf};
     margin-right: 18px;
+    justify-content: center;
 `
 
 export function UnderlinedLink({
@@ -22,7 +22,8 @@ export function UnderlinedLink({
     ColorText,
     buttonOpacity,
     onClick,
-    buttonAlign
+    buttonAlign,
+    marginTopText
 }) {
     return (
         <ButtonLink
@@ -31,6 +32,7 @@ export function UnderlinedLink({
             AlignSelf={buttonAlign}
         >
             <LinkMedium
+                marginTop={marginTopText}
                 ColorText={ColorText}
             >
                 {textIntput}

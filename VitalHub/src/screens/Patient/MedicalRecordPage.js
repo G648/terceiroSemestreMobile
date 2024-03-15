@@ -7,8 +7,12 @@ import { DataUser } from '../../components/Header/Header';
 import { InputStyle, ScrollViewContainer, TextLabel } from '../Doctor/MedicalRecord';
 import { APP_COLORS } from '../../utils/App_colors';
 import { Button } from '../../components/Button/Button';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ContainerView } from '../../components/Buttons/Buttons';
+import { UnderlinedLink } from '../../components/Links/Style';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function MedicalRecordPage({navigation}) {
+export default function MedicalRecordPage({ navigation }) {
 
     const [isEditable, setIsEditable] = useState(false);
     const route = useRoute();
@@ -17,11 +21,11 @@ export default function MedicalRecordPage({navigation}) {
 
     const toggleEdit = () => {
         setIsEditable(prevState => !prevState); // Alterna entre editável e não editável
-      };
-    
-      const handleSave = () => {
+    };
+
+    const handleSave = () => {
         setIsEditable(false); // Define todos os inputs como não editáveis ao salvar
-      };
+    };
 
     return (
         <Container>
@@ -97,8 +101,43 @@ export default function MedicalRecordPage({navigation}) {
                 </TextLabel>
 
                 <Button
+                    activeOpacity={.8}
                     onPress={() => navigation.navigate("MedicalExamsPhotos")}
-                />
+                    width={'100%'}
+                    height={140}
+                    marginTop={20}
+                    backgroundColor={APP_COLORS.lightGray}
+                    border={APP_COLORS.lightGray}
+                    title={<MaterialCommunityIcons name="alert-box-outline" size={24} color="black" />}
+                    color={APP_COLORS.white}
+                >
+
+                </Button>
+
+                <ContainerView
+                    widthContainer={'100%'}
+                    marginTop={'6%'}
+                >
+                    <Button
+                        iconRef={<MaterialIcons name="add-a-photo" size={19} color="white" />}
+                        activeOpacity={.8}
+                        backgroundColor={APP_COLORS.primary}
+                        border={APP_COLORS.primary}
+                        color={APP_COLORS.white}
+                        title={"Enviar"}
+                        width={'60%'}
+                        isButtonTakePicture={true}
+                        spaceIconText={'space-evenly'}
+                    />
+
+                    <UnderlinedLink
+                        marginTopText={0}
+                        textIntput={"Cancelar"}
+                        ColorText={APP_COLORS.red}
+                        buttonAlign={'center'}
+                        buttonOpacity={.8}
+                    />
+                </ContainerView>
             </ScrollViewContainer>
         </Container>
     )
