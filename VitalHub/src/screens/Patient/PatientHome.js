@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { MockData } from '../../utils/MockData';
 import { CardSituation } from '../../utils/AppSituationCard';
 import { Container } from '../../components/Container/Style';
 import { Header } from '../../components/Header/Header';
@@ -15,6 +14,8 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import ScheduleAppointment from '../../components/Dialogs/ScheduleAppointment';
 import { SeeMedicalDialog } from '../../components/Dialogs/SeeMedicalDialog';
+import * as Notifications from 'expo-notifications'
+import { Image } from 'react-native';
 
 
 export const ScheduledButton = styled.TouchableOpacity`
@@ -43,12 +44,11 @@ const PatientHome = ({ navigation }) => {
     const [isModalCancel, setIsModalCancel] = useState(false);
     const [isModalMedical, setisModalMedical] = useState(false);
     const [isModalScheduleVisible, setIsModalScheduleVisible] = useState(false);
-    const [isModalMedicalRecord, setIsModalMedicalRecord] = useState(false);
     const [selectedUserData, setSelectedUserData] = useState({});
     const [selectedInput, setSelectedInput] = useState("");
 
     const handleCardPress = (selectedSituation, userData) => {
-        selectedSituation == "Agendadas" ? setIsModalCancel(true) : navigation.navigate('MedicalRecordPage', {userData: userData})
+        selectedSituation == "Agendadas" ? setIsModalCancel(true) : navigation.navigate('MedicalRecordPage', { userData: userData })
         setSelectedUserData(userData)
     };
 
@@ -57,7 +57,52 @@ const PatientHome = ({ navigation }) => {
         setSelectedUserData(userData)
     }
 
+    //solicitar as permissões de notificação ao iniciar o app
+    Notifications.requestPermissionsAsync();
 
+    //Definir como as notificações devem ser tratadas quando recebidas
+    Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+            shouldShowAlert: true, //deverá exibir o alert quando a notificação for recebida
+            shouldPlaySound: true, //reproduz ou não som ao receber a mensagem
+            shouldSetBadge: false, //configura número de notificações no ícone do app
+        }),
+    })
+
+    async function handleCallNotifications() {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync(); //obter o status da permissão
+        let finalStatus = existingStatus;
+
+        //   return;
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+
+        //obter o token de envio de notificação
+        // const token = await Notifications.getExpoPushTokenAsync();
+
+        // console.log('====================================');
+        // console.log(token);
+        // console.log('====================================');
+
+        //agendar uma notificação para ser exibida após 5 segundos
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: "Vital Hub",
+                subtitle: "Cancelar consulta",
+                body: `Notificação de Cancelamento.
+                Prezado(a) Gustavo Henrique, Gostaríamos de informar que, a partir da presente data, estamos cancelando a consulta de ${selectedUserData.especialidade} agendada com o ${selectedUserData.nome}`,
+            },
+            trigger: null
+        })
+
+        setIsModalCancel(false)
+    }
 
     useEffect(() => {
         let newData = [];
@@ -150,7 +195,7 @@ const PatientHome = ({ navigation }) => {
                     customContent={"Ao cancelar essa consulta, abrirá uma possível disponibilidade no seu horário, deseja mesmo cancelar essa consulta?"}
                     fontSizeText={"22px"}
                     fontSizeTextParagraf={"15px"}
-                    onPressConfirm={() => { setIsModalCancel(false) }}
+                    onPressConfirm={() => { handleCallNotifications() }}
                     onPressCancel={() => { setIsModalCancel(false) }}
                     showCancelButton={true}
                 />
@@ -168,10 +213,8 @@ const PatientHome = ({ navigation }) => {
                 onPressCancel={() => setisModalMedical(false)}
                 titleButton={"Ver local da consulta".toUpperCase()}
                 onPress={() => {
-                    navigation.navigate('MapViewLocation');
                     setisModalMedical(false);
-                    //enviar os dados para a página de medicalRecords
-                    // navigation.navigate("MedicalRecord", {userData: selectedUserData})
+                    navigation.navigate('MapViewLocation');
                 }}
                 widtContainerInfoUser={180}
                 marginBottomName={"15px"}
